@@ -3,12 +3,9 @@ import styled, { ThemeProvider } from "styled-components";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-
+    <ThemeProvider theme={lightTheme}>
       
-      </header>
-    </div>
+      </ThemeProvider>
   );
 }
 
