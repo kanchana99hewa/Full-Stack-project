@@ -1,5 +1,5 @@
+import styled, { ThemeProvider } from "styled-components";
 
-import './App.css';
 
 function App() {
   return (
