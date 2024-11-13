@@ -4,7 +4,9 @@ import { lightTheme } from "./utils/Themes";
 function App() {
   return (
     <ThemeProvider theme={lightTheme}>
+<BrowserRouter>
 
+</BrowserRouter>
       </ThemeProvider>
   );
 }
