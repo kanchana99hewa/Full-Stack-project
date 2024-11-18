@@ -1,8 +1,15 @@
 import React from 'react'
+import styled from "styled-components";
 
 const Navbar = () => {
   return (
-    <div>Navbar</div>
+    <Nav>
+    <NavbarContainer>
+      <MobileIcon onClick={() => setIsOpen(!isOpen)}>
+        <MenuRounded style={{ color: "inherit" }} />
+      </MobileIcon>
+      </NavbarContainer>
+    </Nav>
   )
 }
 
