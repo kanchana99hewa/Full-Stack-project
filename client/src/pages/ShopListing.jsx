@@ -1,10 +1,8 @@
 import React from 'react'
 
-function ShopListing() {
+const ShopListing = () => {
   return (
-    <div>
-      
-    </div>
+    <div>ShopListing</div>
   )
 }
 

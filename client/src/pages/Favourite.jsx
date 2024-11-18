@@ -1,10 +1,8 @@
 import React from 'react'
 
-function Favourite() {
+const Favourite = () => {
   return (
-    <div>
-      
-    </div>
+    <div>Favourite</div>
   )
 }
 

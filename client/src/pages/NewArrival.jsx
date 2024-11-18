@@ -1,10 +1,8 @@
 import React from 'react'
 
-function NewArrival() {
+const NewArrival = () => {
   return (
-    <div>
-      
-    </div>
+    <div>NewArrival</div>
   )
 }
 
