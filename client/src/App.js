@@ -19,7 +19,13 @@ function App() {
 <BrowserRouter>
           <Container>
           <Navbar setOpenAuth={setOpenAuth} currentUser={currentUser} />
-         
+          <Routes>
+            <Route path="/" exact element={<Home />} />
+            <Route path="/shop" exact element={<ShopListing />} />
+            <Route path="/favorite" exact element={<Favourite />} />
+            <Route path="/cart" exact element={<Cart />} />
+            <Route path="/shop/:id" exact element={<ProductDetails />} />
+          </Routes>
           </Container>
 </BrowserRouter>
       </ThemeProvider>
