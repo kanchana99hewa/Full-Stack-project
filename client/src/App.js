@@ -17,7 +17,10 @@ function App() {
   return (
     <ThemeProvider theme={lightTheme}>
 <BrowserRouter>
-
+          <Container>
+          <Navbar setOpenAuth={setOpenAuth} currentUser={currentUser} />
+         
+          </Container>
 </BrowserRouter>
       </ThemeProvider>
   );
