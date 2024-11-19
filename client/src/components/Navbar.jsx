@@ -22,7 +22,27 @@ const Navbar = () => {
           <Navlink to="/Orders">Orders</Navlink>
           <Navlink to="/Contact">Contact</Navlink>
         </NavItems>
-
+        
+        {isOpen && (
+          <MobileMenu isOpen={isOpen}>
+            <Navlink to="/" onClick={() => setIsOpen(!isOpen)}>
+              Home
+            </Navlink>
+            <Navlink onClick={() => setIsOpen(!isOpen)} to="/Shop">
+              Shop
+            </Navlink>
+            <Navlink onClick={() => setIsOpen(!isOpen)} to="/New_Arrivals">
+              New Arrivals
+            </Navlink>
+            <Navlink onClick={() => setIsOpen(!isOpen)} to="/Orders">
+              Orders
+            </Navlink>
+            <Navlink onClick={() => setIsOpen(!isOpen)} to="/Contact">
+              Contact
+            </Navlink>
+            {currentUser ? (
+              <Button text="Logout" small onClick={() => dispatch(logout())} />
+            ) : (
 
       </NavbarContainer>
     </Nav>
