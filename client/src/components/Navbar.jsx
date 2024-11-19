@@ -4,6 +4,16 @@ import LogoImg from "../utils/Images/Logo.png";
 import { NavLink } from "react-router-dom";
 import Button from "./Button";
 
+const NavLogo = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 6px;
+  font-weight: 500;
+  font-size: 18px;
+  text-decoration: none;
+  color: inherit;
+`;
 const Navbar = () => {
   return (
     <Nav>
