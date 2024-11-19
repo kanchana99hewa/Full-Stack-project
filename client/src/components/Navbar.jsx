@@ -14,6 +14,23 @@ const NavLogo = styled.div`
   text-decoration: none;
   color: inherit;
 `;
+
+const Logo = styled.img`
+  height: 34px;
+`;
+const NavItems = styled.ul`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  padding: 0 6px;
+  list-style: none;
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+`;
+
 const Navbar = () => {
   return (
     <Nav>
