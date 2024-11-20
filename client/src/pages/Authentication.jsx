@@ -2,7 +2,11 @@ import React from 'react'
 
 const Authentication = () => {
   return (
-    <div>Authentication</div>
+    <Modal>
+      <Container>
+      Authentication
+      </Container>
+      </Modal>
   )
 }
 
