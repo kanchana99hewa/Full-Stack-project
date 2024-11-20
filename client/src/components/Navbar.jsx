@@ -163,6 +163,40 @@ const Navbar = () => {
             )}
           </MobileMenu>
         )}
+        <Mobileicons>
+        <Navlink to="/search">
+          <SearchRounded sx={{ color: "inherit", fontSize: "30px" }} />
+        </Navlink>
+
+        {currentUser ? (
+          <>
+            <Navlink to="/favorite">
+              <FavoriteBorder sx={{ color: "inherit", fontSize: "28px" }} />
+            </Navlink>
+            <Navlink to="/cart">
+              <ShoppingCartOutlined
+                sx={{ color: "inherit", fontSize: "28px" }}
+              />
+            </Navlink>
+            <Avatar
+              src={currentUser?.img}
+              sx={{
+                color: "inherit",
+                fontSize: "28px",
+              }}
+            >
+              {currentUser?.name[0]}
+            </Avatar>
+          </>
+        ) : (
+          <Button
+            text="SignIn"
+            small
+            onClick={() => setOpenAuth(!openAuth)}
+          />
+        )}
+      </Mobileicons>
+
       </NavbarContainer>
     </Nav>
   );
