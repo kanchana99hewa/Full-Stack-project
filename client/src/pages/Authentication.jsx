@@ -1,10 +1,11 @@
 import React from 'react'
 
-const Authentication = () => {
+const Authentication = ({ openAuth, setOpenAuth }) => {
   return (
     <Modal>
       <Container>
-      Authentication
+     <Left>l</Left>
+     <Right>r</Right>
       </Container>
       </Modal>
   )
