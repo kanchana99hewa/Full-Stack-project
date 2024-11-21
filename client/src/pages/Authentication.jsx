@@ -1,4 +1,7 @@
 import React from 'react'
+import { Modal } from "@mui/material";
+
+
 
 const Authentication = ({ openAuth, setOpenAuth }) => {
   return (

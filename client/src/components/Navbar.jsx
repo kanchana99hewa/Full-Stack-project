@@ -13,6 +13,8 @@ import { Avatar } from "@mui/material";
 import { logout } from "../redux/reducers/userSlice";
 import { useDispatch } from "react-redux";
 
+
+
 const Nav = styled.div`
   background-color: ${({ theme }) => theme.bg};
   height: 80px;
