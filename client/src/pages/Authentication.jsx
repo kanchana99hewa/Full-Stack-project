@@ -2,6 +2,13 @@ import React from 'react'
 import { Modal } from "@mui/material";
 import styled from "styled-components";
 
+const Container = styled.div`
+  flex: 1;
+  height: 100%;
+  display: flex;
+  background: ${({ theme }) => theme.bg};
+`;
+
 const Left = styled.div`
   flex: 1;
   position: relative;
