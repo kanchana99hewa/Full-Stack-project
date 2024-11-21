@@ -35,6 +35,12 @@ const Logo = styled.img`
   left: 60px;
   z-index: 10;
 `;
+const Image = styled.img`
+  position: relative;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+`;
 
 const Authentication = ({ openAuth, setOpenAuth }) => {
   return (
