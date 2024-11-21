@@ -46,7 +46,10 @@ const Authentication = ({ openAuth, setOpenAuth }) => {
   return (
     <Modal>
       <Container>
-     <Left>l</Left>
+      <Left>
+          <Logo src={LogoImage} />
+          <Image src={AuthImage} />
+        </Left>
      <Right>r</Right>
       </Container>
       </Modal>
