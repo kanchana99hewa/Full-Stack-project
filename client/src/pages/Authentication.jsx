@@ -9,6 +9,19 @@ const Left = styled.div`
     display: none;
   }
 `;
+const Right = styled.div`
+  position: relative;
+  flex: 0.9;
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  gap: 16px;
+  align-items: center;
+  justify-content: center;
+  @media screen and (max-width: 768px) {
+    flex: 1;
+  }
+`;
 
 const Authentication = ({ openAuth, setOpenAuth }) => {
   return (
