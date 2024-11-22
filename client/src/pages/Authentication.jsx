@@ -83,6 +83,14 @@ const Authentication = ({ openAuth, setOpenAuth }) => {
               </Text>
             </>
           ) : (
+            <>
+              <SignUp setOpenAuth={setOpenAuth} />
+              <Text>
+                Already have an account ?{" "}
+                <TextButton onClick={() => setLogin(true)}>Sign In</TextButton>
+              </Text>
+            </>
+          )}
           </Right>
       </Container>
       </Modal>
