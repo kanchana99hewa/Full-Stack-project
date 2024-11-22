@@ -72,7 +72,18 @@ const Authentication = ({ openAuth, setOpenAuth }) => {
         <Right>
           <CloseButton>
             <Close onClick={() => setOpenAuth(false)} />
-          </CloseButton></Right>
+          </CloseButton>
+          {login ? (
+            <>
+              <SignIn setOpenAuth={setOpenAuth} />
+              <Text>
+                {" "}
+                Don't have an account ?{" "}
+                <TextButton onClick={() => setLogin(false)}>Sign Up</TextButton>
+              </Text>
+            </>
+          ) : (
+          </Right>
       </Container>
       </Modal>
   )
