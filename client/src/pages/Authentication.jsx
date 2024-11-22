@@ -1,6 +1,8 @@
 import React from 'react'
 import { Modal } from "@mui/material";
 import styled from "styled-components";
+import LogoImage from "../utils/Images/Logo.png";
+import AuthImage from "../utils/Images/AuthImage.png";
 
 const Container = styled.div`
   flex: 1;
@@ -40,6 +42,22 @@ const Image = styled.img`
   height: 100%;
   width: 100%;
   object-fit: cover;
+`;
+const CloseButton = styled.div`
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  border-radius: 50%;
+  padding: 2px;
+  width: 32px;
+  height: 32px;
+  border: 1px solid ${({ theme }) => theme.primary};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:hover {
+    background: ${({ theme }) => theme.primary + 20};
+  }
 `;
 
 const Authentication = ({ openAuth, setOpenAuth }) => {
