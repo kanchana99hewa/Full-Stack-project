@@ -1,8 +1,11 @@
-import React from 'react'
 import { Modal } from "@mui/material";
+import React, { useState } from "react";
 import styled from "styled-components";
 import LogoImage from "../utils/Images/Logo.png";
 import AuthImage from "../utils/Images/AuthImage.png";
+import { Close } from "@mui/icons-material";
+import SignIn from "../components/SignIn";
+import SignUp from "../components/SignUp";
 
 const Container = styled.div`
   flex: 1;
@@ -10,7 +13,6 @@ const Container = styled.div`
   display: flex;
   background: ${({ theme }) => theme.bg};
 `;
-
 const Left = styled.div`
   flex: 1;
   position: relative;
@@ -18,6 +20,20 @@ const Left = styled.div`
     display: none;
   }
 `;
+
+const Logo = styled.img`
+  position: absolute;
+  top: 40px;
+  left: 60px;
+  z-index: 10;
+`;
+const Image = styled.img`
+  position: relative;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+`;
+
 const Right = styled.div`
   position: relative;
   flex: 0.9;
@@ -31,18 +47,7 @@ const Right = styled.div`
     flex: 1;
   }
 `;
-const Logo = styled.img`
-  position: absolute;
-  top: 40px;
-  left: 60px;
-  z-index: 10;
-`;
-const Image = styled.img`
-  position: relative;
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-`;
+
 const CloseButton = styled.div`
   position: absolute;
   top: 20px;
@@ -60,12 +65,30 @@ const CloseButton = styled.div`
   }
 `;
 
+const Text = styled.p`
+  display: flex;
+  gap: 12px;
+  font-size: 16px;
+  text-align: center;
+  color: ${({ theme }) => theme.text_secondary};
+  margin-top: 16px;
+  @media (max-width: 400px) {
+    font-size: 14px;
+  }
+`;
+const TextButton = styled.div`
+  color: ${({ theme }) => theme.primary};
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+`;
+
 const Authentication = ({ openAuth, setOpenAuth }) => {
   const [login, setLogin] = useState(true);
   return (
-    <Modal>
+    <Modal open={openAuth} onClose={() => setOpenAuth(false)}>
       <Container>
-      <Left>
+        <Left>
           <Logo src={LogoImage} />
           <Image src={AuthImage} />
         </Left>
@@ -91,10 +114,10 @@ const Authentication = ({ openAuth, setOpenAuth }) => {
               </Text>
             </>
           )}
-          </Right>
+        </Right>
       </Container>
-      </Modal>
-  )
-}
+    </Modal>
+  );
+};
 
-export default Authentication
+export default Authentication;
