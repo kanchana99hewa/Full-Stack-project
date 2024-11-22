@@ -61,6 +61,7 @@ const CloseButton = styled.div`
 `;
 
 const Authentication = ({ openAuth, setOpenAuth }) => {
+  const [login, setLogin] = useState(true);
   return (
     <Modal>
       <Container>
