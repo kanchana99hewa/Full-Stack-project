@@ -115,6 +115,41 @@ const MobileIcon = styled.div`
     align-items: center;
   }
 `;
+const MobileIcons = styled.div`
+  color: ${({ theme }) => theme.text_primary};
+  display: none;
+  @media screen and (max-width: 768px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+  }
+`;
+
+const ButtonContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  gap: 28px;
+  align-items: center;
+  padding: 0 6px;
+  color: ${({ theme }) => theme.primary};
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+`;
+const TextButton = styled.div`
+  text-align: end;
+  color: ${({ theme }) => theme.secondary};
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  &:hover {
+    color: ${({ theme }) => theme.primary};
+  }
+`;
 
 const Navbar = ({ openAuth, setOpenAuth, currentUser }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -181,8 +216,63 @@ const Navbar = ({ openAuth, setOpenAuth, currentUser }) => {
             )}
           </MobileMenu>
         )}
+<MobileIcons>
+
+
+  <Navlink to="/search">
+    <SearchRounded sx={{ color: "inherit", fontSize: "30px" }} />
+  </Navlink>
   
-      
+  <>
+              <Navlink to="/favorite">
+                <FavoriteBorder sx={{ color: "inherit", fontSize: "28px" }} />
+              </Navlink>
+              <Navlink to="/cart">
+                <ShoppingCartOutlined
+                  sx={{ color: "inherit", fontSize: "28px" }}
+                />
+              </Navlink>
+              <Avatar
+                src={currentUser?.img}
+                sx={{
+                  color: "inherit",
+                  fontSize: "28px",
+                }}
+              >
+                {currentUser?.name[0]}
+              </Avatar>
+            </>
+
+</MobileIcons>
+
+<ButtonContainer>
+          <Navlink to="/search">
+            <SearchRounded sx={{ color: "inherit", fontSize: "30px" }} />
+          </Navlink>
+
+          
+            <>
+              <Navlink to="/favorite">
+                <FavoriteBorder sx={{ color: "inherit", fontSize: "28px" }} />
+              </Navlink>
+              <Navlink to="/cart">
+                <ShoppingCartOutlined
+                  sx={{ color: "inherit", fontSize: "28px" }}
+                />
+              </Navlink>
+              <Avatar
+                src={currentUser?.img}
+                sx={{
+                  color: "inherit",
+                  fontSize: "28px",
+                }}
+              >
+                {currentUser?.name[0]}
+              </Avatar>
+              <TextButton onClick={() => dispatch(logout())}>Logout</TextButton>
+            </>
+         
+        </ButtonContainer>
 
       </NavbarContainer>
     </Nav>
