@@ -52,14 +52,7 @@ const Logo = styled.img`
   height: auto;
 `;
 
-const MobileIcon = styled.div`
-  color: ${({ theme }) => theme.text_primary};
-  display: none;
-  @media screen and (max-width: 768px) {
-    display: flex;
-    align-items: center;
-  }
-`;
+
 
 
 
@@ -112,6 +105,14 @@ const Navlink = styled(NavLink)`
   &.active {
     color: ${({ theme }) => theme.primary};
     border-bottom: 1.8px solid ${({ theme }) => theme.primary};
+  }
+`;
+const MobileIcon = styled.div`
+  color: ${({ theme }) => theme.text_primary};
+  display: none;
+  @media screen and (max-width: 768px) {
+    display: flex;
+    align-items: center;
   }
 `;
 
@@ -180,8 +181,8 @@ const Navbar = ({ openAuth, setOpenAuth, currentUser }) => {
             )}
           </MobileMenu>
         )}
-
-        
+  
+      
 
       </NavbarContainer>
     </Nav>
