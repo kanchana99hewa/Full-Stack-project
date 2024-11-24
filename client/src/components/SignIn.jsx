@@ -21,6 +21,18 @@ const Span = styled.div`
   font-weight: 400;
   color: ${({ theme }) => theme.text_secondary + 90};
 `;
+const TextButton = styled.div`
+  width: 100%;
+  text-align: end;
+  color: ${({ theme }) => theme.text_primary};
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  &:hover {
+    color: ${({ theme }) => theme.primary};
+  }
+`;
 
 function SignIn() {
   const [email, setEmail] = useState("");
@@ -45,7 +57,7 @@ function SignIn() {
           value={password}
           handelChange={(e) => setPassword(e.target.value)}
         />
-   
+        <TextButton>Forgot Password?</TextButton>
       
       
     </Container>
