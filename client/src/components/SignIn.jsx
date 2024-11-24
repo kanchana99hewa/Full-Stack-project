@@ -35,8 +35,12 @@ const TextButton = styled.div`
 `;
 
 function SignIn() {
+
+  const [buttonLoading, setButtonLoading] = useState(false);
+  const [buttonDisabled, setButtonDisabled] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
 
   return (
     <Container>
@@ -62,7 +66,7 @@ function SignIn() {
       <TextButton>Forgot Password?</TextButton>
       <Button
         text="Sign In"
-        onClick={handelSignIn}
+        
         isLoading={buttonLoading}
         isDisabled={buttonDisabled}
       />
