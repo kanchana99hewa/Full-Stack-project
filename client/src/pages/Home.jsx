@@ -1,9 +1,15 @@
-import React from 'react'
+import React from 'react';
+import SignIn from "../components/SignIn";
 
 const Home = () => {
   return (
-    <div>Home</div>
-  )
+    <div>
+      <div>
+        This is Home
+      </div>
+      <SignIn />
+    </div>
+  );
 }
 
-export default Home
+export default Home;
