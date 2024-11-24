@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import TextInput from "./TextInput";
-
+import Button from "./Button";
 
 
 const Container = styled.div`
@@ -40,27 +40,34 @@ function SignIn() {
 
   return (
     <Container>
-      <div>
+    <div>
       <Title>Welcome to Krist 👋</Title>
       <Span>Please login with your details here</Span>
-      </div>
+    </div>
+    <div style={{ display: "flex", gap: "20px", flexDirection: "column" }}>
       <TextInput
-          label="Email Address"
-          placeholder="Enter your email address"
-          value={email}
-          handelChange={(e) => setEmail(e.target.value)}
-        />
-        <TextInput
-          label="Password"
-          placeholder="Enter your password"
-          password
-          value={password}
-          handelChange={(e) => setPassword(e.target.value)}
-        />
-        <TextButton>Forgot Password?</TextButton>
-      
-      
-    </Container>
+        label="Email Address"
+        placeholder="Enter your email address"
+        value={email}
+        handelChange={(e) => setEmail(e.target.value)}
+      />
+      <TextInput
+        label="Password"
+        placeholder="Enter your password"
+        password
+        value={password}
+        handelChange={(e) => setPassword(e.target.value)}
+      />
+
+      <TextButton>Forgot Password?</TextButton>
+      <Button
+        text="Sign In"
+        onClick={handelSignIn}
+        isLoading={buttonLoading}
+        isDisabled={buttonDisabled}
+      />
+    </div>
+  </Container>
   )
 }
 
