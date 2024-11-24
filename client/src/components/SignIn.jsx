@@ -41,7 +41,14 @@ function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-
+  const validateInputs = () => {
+    if (!email || !password) {
+      alert("Please fill in all fields");
+      return false;
+    }
+    return true;
+  };
+  
   return (
     <Container>
     <div>
@@ -66,7 +73,7 @@ function SignIn() {
       <TextButton>Forgot Password?</TextButton>
       <Button
         text="Sign In"
-        
+        onClick={handelSignIn}
         isLoading={buttonLoading}
         isDisabled={buttonDisabled}
       />
