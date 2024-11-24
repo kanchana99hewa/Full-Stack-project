@@ -14,7 +14,13 @@ const Container = styled.div`
 function SignIn() {
   return (
     <Container>
-  
+      <div>
+      <Title>Welcome to Krist 👋</Title>
+      <Textnput>
+
+      </Textnput>
+      </div>
+      
     </Container>
   )
 }
