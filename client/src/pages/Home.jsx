@@ -1,6 +1,16 @@
 import React from 'react';
 import styled from "styled-components";
 
+const CardWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+  @media (max-width: 750px) {
+    gap: 14px;
+  }
+`;
+
 const Container = styled.div`
   padding: 20px 30px;
   padding-bottom: 200px;
@@ -31,7 +41,7 @@ const Home = () => {
           alignItems: "center",
         }}
       >
-      <Img src={HeaderImage} />
+      <Img src={} />
       </Section>
 
       <Section>
