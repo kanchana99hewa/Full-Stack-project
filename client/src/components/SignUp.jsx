@@ -62,8 +62,8 @@ function SignUp() {
   return (
     <Container>
     <div>
-      <Title>Welcome to Krist 👋</Title>
-      <Span>Please login with your details here</Span>
+      <Title>Create New Account </Title>
+      <Span>Please enter details to create an account</Span>
     </div>
     <div style={{ display: "flex", gap: "20px", flexDirection: "column" }}>
       <TextInput
