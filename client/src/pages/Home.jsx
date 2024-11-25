@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from "styled-components";
 
 const Container = styled.div`
   padding: 20px 30px;
@@ -13,6 +14,13 @@ const Container = styled.div`
     padding: 20px 12px;
   }
   background: ${({ theme }) => theme.bg};
+`;
+const Section = styled.div`
+  max-width: 1400px;
+  padding: 32px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
 `;
 
 const Home = () => {
