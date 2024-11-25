@@ -52,6 +52,14 @@ const Home = () => {
           ))}
         </CardWrapper>
       </Section>
+      <Section>
+        <Title center>Our Bestseller</Title>
+        <CardWrapper>
+          {products.map((product) => (
+            <ProductCard product={product} />
+          ))}
+        </CardWrapper>
+      </Section>
 
       </Container>
   );
