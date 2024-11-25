@@ -1,5 +1,10 @@
-import React from 'react';
+import React from "react";
 import styled from "styled-components";
+import HeaderImage from "../utils/Images/Header.png";
+import { category } from "../utils/data";
+import ProductCategoryCard from "../components/cards/ProductCategoryCard";
+import ProductCard from "../components/cards/ProductCard";
+
 
 
 
@@ -57,7 +62,7 @@ const Home = () => {
           alignItems: "center",
         }}
       >
-      <Img src={} />
+      <Img src={HeaderImage} />
       </Section>
 
       <Section>
