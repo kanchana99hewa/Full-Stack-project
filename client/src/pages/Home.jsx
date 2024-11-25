@@ -26,9 +26,23 @@ const Section = styled.div`
 const Home = () => {
   return (
     <Container>
-      <Section>
-
+      <Section
+        style={{
+          alignItems: "center",
+        }}
+      >
+      <Img src={HeaderImage} />
       </Section>
+
+      <Section>
+        <Title>Shop by Categories</Title>
+        <CardWrapper>
+          {category.map((category) => (
+            <ProductCategoryCard category={category} />
+          ))}
+        </CardWrapper>
+      </Section>
+
       </Container>
   );
 }
