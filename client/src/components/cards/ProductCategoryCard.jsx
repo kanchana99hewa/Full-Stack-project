@@ -1,7 +1,6 @@
-import React from 'react'
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-
 
 const Card = styled.div`
   width: 250px;
@@ -14,7 +13,16 @@ const Card = styled.div`
     width: 170px;
   }
 `;
-
+const Image = styled.img`
+  width: 100%;
+  height: 320px;
+  border-radius: 6px;
+  object-fit: cover;
+  transition: all 0.3s ease-out;
+  @media (max-width: 600px) {
+    height: 240px;
+  }
+`;
 const Top = styled.div`
   display: flex;
   align-items: center;
@@ -27,16 +35,6 @@ const Top = styled.div`
   }
   &:hover ${Image} {
     opacity: 0.8;
-  }
-`;
-const Image = styled.img`
-  width: 100%;
-  height: 320px;
-  border-radius: 6px;
-  object-fit: cover;
-  transition: all 0.3s ease-out;
-  @media (max-width: 600px) {
-    height: 240px;
   }
 `;
 const Menu = styled.div`
@@ -79,10 +77,8 @@ const Sale = styled.div`
   }
 `;
 
-
 const ProductCategoryCard = ({ category }) => {
-    const navigate = useNavigate();
-    
+  const navigate = useNavigate();
   return (
     <Card onClick={() => navigate(`/shop?category=${category.name}`)}>
       <Top>
@@ -93,7 +89,7 @@ const ProductCategoryCard = ({ category }) => {
         <Sale>{category.off}</Sale>
       </Top>
     </Card>
-  )
-}
+  );
+};
 
-export default ProductCategoryCard
+export default ProductCategoryCard;
