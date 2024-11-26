@@ -50,6 +50,18 @@ const Menu = styled.div`
   display: flex;
   gap: 12px;
 `;
+const Button = styled.div`
+  width: 100%;
+  color: ${({ theme }) => theme.primary};
+  padding: 12px 20px;
+  background: white;
+  border-radius: 12px;
+  text-align: center;
+  font-weight: 500;
+  @media (max-width: 600px) {
+    padding: 6px 14px;
+  }
+`;
 
 const ProductCategoryCard = ({ category }) => {
     const navigate = useNavigate();
