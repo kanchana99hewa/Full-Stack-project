@@ -1,9 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import HeaderImage from "../utils/Images/Header.png";
-import { category } from "../utils/data";
-import ProductCategoryCard from "../components/cards/ProductCategoryCard";
-import ProductCard from "../components/cards/ProductCard";
+
+
 
 
 
@@ -29,12 +27,7 @@ const Section = styled.div`
   flex-direction: column;
   gap: 28px;
 `;
-const Img = styled.img`
-  width: 90%;
-  height: 700px;
-  object-fit: cover;
-  max-width: 1200px;
-`;
+
 
 const Title = styled.div`
   font-size: 28px;
@@ -55,6 +48,7 @@ const CardWrapper = styled.div`
 `;
 
 const Home = () => {
+
   return (
     <Container>
       <Section
@@ -62,26 +56,17 @@ const Home = () => {
           alignItems: "center",
         }}
       >
-      <Img src={HeaderImage} />
+     
       </Section>
 
       <Section>
         <Title>Shop by Categories</Title>
         <CardWrapper>
-          {category.map((category) => (
-            <ProductCategoryCard category={category} />
-          ))}
+         
         </CardWrapper>
       </Section>
       
-      <Section>
-        <Title center>Our Bestseller</Title>
-        <CardWrapper>
-          {products.map((product) => (
-            <ProductCard product={product} />
-          ))}
-        </CardWrapper>
-      </Section>
+     
 
       </Container>
   );
