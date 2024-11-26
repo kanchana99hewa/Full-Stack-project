@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import HeaderImage from "../utils/Images/Header.png";
-import { category } from "../utils/data";
+
 import ProductCategoryCard from "../components/cards/ProductCategoryCard";
-import ProductCard from "../components/cards/ProductCard";
+
 
 
 
@@ -58,20 +58,11 @@ const CardWrapper = styled.div`
 `;
 
 const Home = () => {
-  const [products, setProducts] = useState([]);
 
-  const getProducts = async () => {
-    setLoading(true);
-    await getAllProducts().then((res) => {
-      setProducts(res.data);
-      setLoading(false);
-    });
-  };
 
-  useEffect(() => {
-    getProducts();
-  }, []);
 
+
+  
 
   return (
     <Container>
@@ -86,9 +77,7 @@ const Home = () => {
       <Section>
         <Title>Shop by Categories</Title>
         <CardWrapper>
-        {category.map((category) => (
-            <ProductCategoryCard category={category} />
-          ))}
+        
         </CardWrapper>
       </Section>
       
