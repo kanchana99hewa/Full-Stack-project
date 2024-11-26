@@ -14,14 +14,40 @@ const Card = styled.div`
     width: 170px;
   }
 `;
+const Top = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border-radius: 6px;
+  transition: all 0.3s ease-out;
+  &:hover {
+    background-color: ${({ theme }) => theme.primary};
+  }
+  &:hover ${Image} {
+    opacity: 0.8;
+  }
+`;
+const Image = styled.img`
+  width: 100%;
+  height: 320px;
+  border-radius: 6px;
+  object-fit: cover;
+  transition: all 0.3s ease-out;
+  @media (max-width: 600px) {
+    height: 240px;
+  }
+`;
 
 const ProductCategoryCard = ({ category }) => {
     const navigate = useNavigate();
-
+    
   return (
     <div>
       <Card onClick={() => navigate(`/shop?category=${category.name}`)}>
-      
+      <Top>
+      <Image src={category.img} />
+      </Top>
       </Card>
     </div>
   )
