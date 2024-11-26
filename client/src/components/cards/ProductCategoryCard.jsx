@@ -14,6 +14,7 @@ const Card = styled.div`
     width: 170px;
   }
 `;
+
 const Top = styled.div`
   display: flex;
   align-items: center;
@@ -38,6 +39,17 @@ const Image = styled.img`
     height: 240px;
   }
 `;
+const Menu = styled.div`
+  width: 90%;
+  position: absolute;
+  z-index: 10;
+  color: ${({ theme }) => theme.text_primary};
+  bottom: 20px;
+  left: 50;
+  right: 50;
+  display: flex;
+  gap: 12px;
+`;
 
 const ProductCategoryCard = ({ category }) => {
     const navigate = useNavigate();
@@ -47,6 +59,9 @@ const ProductCategoryCard = ({ category }) => {
       <Card onClick={() => navigate(`/shop?category=${category.name}`)}>
       <Top>
       <Image src={category.img} />
+      <Menu>
+          <Button>{category.name}</Button>
+        </Menu>
       </Top>
       </Card>
     </div>
