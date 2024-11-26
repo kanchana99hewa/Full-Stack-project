@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import HeaderImage from "../utils/Images/Header.png";
+
 
 
 
@@ -27,7 +29,12 @@ const Section = styled.div`
   flex-direction: column;
   gap: 28px;
 `;
-
+const Img = styled.img`
+  width: 90%;
+  height: 700px;
+  object-fit: cover;
+  max-width: 1200px;
+`;
 
 const Title = styled.div`
   font-size: 28px;
@@ -56,7 +63,7 @@ const Home = () => {
           alignItems: "center",
         }}
       >
-     
+     <Img src={HeaderImage} />
       </Section>
 
       <Section>
