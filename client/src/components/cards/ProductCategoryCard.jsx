@@ -62,21 +62,37 @@ const Button = styled.div`
     padding: 6px 14px;
   }
 `;
+const Sale = styled.div`
+  position: absolute;
+  z-index: 10;
+  color: ${({ theme }) => theme.text_primary};
+  top: 10px;
+  right: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  color: white;
+  background: green;
+  padding: 3px 6px;
+  border-radius: 4px;
+  @media (max-width: 600px) {
+    font-size: 10px;
+  }
+`;
+
 
 const ProductCategoryCard = ({ category }) => {
     const navigate = useNavigate();
     
   return (
-    <div>
-      <Card onClick={() => navigate(`/shop?category=${category.name}`)}>
+    <Card onClick={() => navigate(`/shop?category=${category.name}`)}>
       <Top>
-      <Image src={category.img} />
-      <Menu>
+        <Image src={category.img} />
+        <Menu>
           <Button>{category.name}</Button>
         </Menu>
+        <Sale>{category.off}</Sale>
       </Top>
-      </Card>
-    </div>
+    </Card>
   )
 }
 
