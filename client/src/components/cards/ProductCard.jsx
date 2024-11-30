@@ -43,6 +43,14 @@ function ProductCard() {
              <Rate>
           <Rating value={3.5} sx={{ fontSize: "14px" }} />
         </Rate>
+        <Details >
+
+        </Details>
+        <Price>
+            <Title>
+                
+            </Title>
+        </Price>
           </MenuItem>
           </Menu>
       </Top>
