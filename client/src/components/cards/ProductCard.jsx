@@ -40,6 +40,9 @@ function ProductCard() {
       <Image src={product?.img} />
         <Menu>
           <MenuItem>
+             <Rate>
+          <Rating value={3.5} sx={{ fontSize: "14px" }} />
+        </Rate>
           </MenuItem>
           </Menu>
       </Top>
