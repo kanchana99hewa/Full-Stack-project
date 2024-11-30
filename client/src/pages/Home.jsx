@@ -3,7 +3,7 @@ import styled from "styled-components";
 import HeaderImage from "../utils/Images/Header.png";
 
 import ProductCategoryCard from "../components/cards/ProductCategoryCard";
-
+import ProductCard from "../components/cards/ProductCard";
 
 
 
@@ -84,6 +84,16 @@ const Home = () => {
      
 
       </Container>
+
+      
+      <Section>
+        <Title center>Our Bestseller</Title>
+        <CardWrapper>
+       
+            <ProductCard  />
+      
+        </CardWrapper>
+      </Section>
   );
 }
 

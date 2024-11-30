@@ -77,6 +77,9 @@ const Sale = styled.div`
   }
 `;
 
+
+
+
 const ProductCategoryCard = ({ category }) => {
   const navigate = useNavigate();
   return (
