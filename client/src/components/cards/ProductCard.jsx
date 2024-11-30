@@ -2,9 +2,16 @@ import React from 'react'
 
 function ProductCard() {
   return (
-    <div>
-      
-    </div>
+    <Card>
+      <Top>
+      <Image src={product?.img} />
+        <Menu>
+          <MenuItem>
+          </MenuItem>
+          </Menu>
+      </Top>
+
+      </Card>
   )
 }
 
