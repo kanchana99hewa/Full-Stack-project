@@ -33,6 +33,16 @@ const Image = styled.img`
     height: 240px;
   }
 `;
+const Details = styled.div`
+import { useDispatch } from "react-redux";
+import { openSnackbar } from "../../redux/reducers/snackbarSlice";
+  display: flex;
+  gap: 6px;
+  flex-direction: column;
+  padding: 4px 10px;
+`;
+
+
 function ProductCard() {
   return (
     <Card>
@@ -43,12 +53,12 @@ function ProductCard() {
              <Rate>
           <Rating value={3.5} sx={{ fontSize: "14px" }} />
         </Rate>
-        <Details >
+        <Details nClick={() => navigate(`/shop/${product._id}`)}>
 
         </Details>
         <Price>
             <Title>
-                
+
             </Title>
         </Price>
           </MenuItem>
