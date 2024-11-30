@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
 const Card = styled.div`
@@ -23,7 +23,16 @@ const Menu = styled.div`
   flex-direction: column;
   gap: 12px;
 `;
-
+const Image = styled.img`
+  width: 100%;
+  height: 320px;
+  border-radius: 6px;
+  object-fit: cover;
+  transition: all 0.3s ease-out;
+  @media (max-width: 600px) {
+    height: 240px;
+  }
+`;
 function ProductCard() {
   return (
     <Card>
