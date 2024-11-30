@@ -5,12 +5,6 @@ import HeaderImage from "../utils/Images/Header.png";
 import ProductCategoryCard from "../components/cards/ProductCategoryCard";
 import ProductCard from "../components/cards/ProductCard";
 
-
-
-
-
-
-
 const Container = styled.div`
   padding: 20px 30px;
   padding-bottom: 200px;
@@ -58,12 +52,6 @@ const CardWrapper = styled.div`
 `;
 
 const Home = () => {
-
-
-
-
-  
-
   return (
     <Container>
       <Section
@@ -71,30 +59,22 @@ const Home = () => {
           alignItems: "center",
         }}
       >
-     <Img src={HeaderImage} />
+        <Img src={HeaderImage} />
       </Section>
 
       <Section>
         <Title>Shop by Categories</Title>
-        <CardWrapper>
-        
-        </CardWrapper>
+        <CardWrapper></CardWrapper>
       </Section>
-      
-     
 
-      </Container>
-
-      
       <Section>
         <Title center>Our Bestseller</Title>
         <CardWrapper>
-       
-            <ProductCard  />
-      
+          <ProductCategoryCard />
         </CardWrapper>
       </Section>
+    </Container>
   );
-}
+};
 
 export default Home;
