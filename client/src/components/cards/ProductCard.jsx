@@ -41,7 +41,17 @@ import { openSnackbar } from "../../redux/reducers/snackbarSlice";
   flex-direction: column;
   padding: 4px 10px;
 `;
-
+const MenuItem = styled.div`
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  background: white;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+`;
 
 function ProductCard() {
   return (
