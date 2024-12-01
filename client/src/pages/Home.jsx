@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import HeaderImage from "../utils/Images/Header.png";
 
-
+import ProductCategoryCard from "../components/cards/ProductCategoryCard";
 import ProductCard from "../components/cards/ProductCard";
 
 const Container = styled.div`
@@ -64,14 +64,18 @@ const Home = () => {
 
       <Section>
         <Title>Shop by Categories</Title>
-        <CardWrapper></CardWrapper>
+        <CardWrapper>
+        <ProductCategoryCard />
+        </CardWrapper>
       </Section>
 
       <Section>
         <Title center>Our Bestseller</Title>
+      
         <CardWrapper>
           <ProductCard />
         </CardWrapper>
+        
       </Section>
     </Container>
   );

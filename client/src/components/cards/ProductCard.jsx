@@ -138,9 +138,14 @@ useEffect(() => {
              <Rate>
           <Rating value={3.5} sx={{ fontSize: "14px" }} />
             </Rate>
-        <Details nClick={() => navigate(`/shop/${product._id}`)}>
-
-        </Details>
+            <Details onClick={() => navigate(`/shop/${product._id}`)}>
+            <Title>{product?.title}</Title>
+            <Desc>{product?.name}</Desc>
+            <Price>
+              ${product?.price?.org} <Span>${product?.price?.mrp}</Span>
+              <Percent>${product?.price?.off}% Off</Percent>
+            </Price>
+           </Details>
         <Price>
             <Title>
 
