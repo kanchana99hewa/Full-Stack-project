@@ -49,10 +49,27 @@ function ProductCard() {
       <Top>
       <Image src={product?.img} />
         <Menu>
+          
+        <MenuItem
+            onClick={() => (favorite ? removeFavorite() : addFavorite())}
+          >
+            {favoriteLoading ? (
+              <CircularProgress sx={{ fontSize: "20px" }} />
+            ) : (
+              <>
+                {favorite ? (
+                  <FavoriteRounded sx={{ fontSize: "20px", color: "red" }} />
+                ) : (
+                  <FavoriteBorder sx={{ fontSize: "20px" }} />
+                )}
+              </>
+            )}
+          </MenuItem>{" "}
+
           <MenuItem>
              <Rate>
           <Rating value={3.5} sx={{ fontSize: "14px" }} />
-        </Rate>
+            </Rate>
         <Details nClick={() => navigate(`/shop/${product._id}`)}>
 
         </Details>

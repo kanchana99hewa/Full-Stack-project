@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import HeaderImage from "../utils/Images/Header.png";
 
-import ProductCategoryCard from "../components/cards/ProductCategoryCard";
+
 import ProductCard from "../components/cards/ProductCard";
 
 const Container = styled.div`
@@ -70,7 +70,7 @@ const Home = () => {
       <Section>
         <Title center>Our Bestseller</Title>
         <CardWrapper>
-          <ProductCategoryCard />
+          <ProductCard />
         </CardWrapper>
       </Section>
     </Container>
