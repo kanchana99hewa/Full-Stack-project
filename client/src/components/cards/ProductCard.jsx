@@ -104,6 +104,27 @@ const addCart = async () => {
       );
     });
 };
+const checkFavourite = async () => {
+  setFavoriteLoading(true);
+  const token = localStorage.getItem("krist-app-token");
+  await getFavourite(token, { productId: product?._id })
+    .then((res) => {
+      const isFavorite = res.data?.some(
+        (favorite) => favorite._id === product?._id
+      );
+      setFavorite(isFavorite);
+      setFavoriteLoading(false);
+    })
+    .catch((err) => {
+      setFavoriteLoading(false);
+      dispatch(
+        openSnackbar({
+          message: err.message,
+          severity: "error",
+        })
+      );
+    });
+};
 useEffect(() => {
   checkFavourite();
 }, []);
