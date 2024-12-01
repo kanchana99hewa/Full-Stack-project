@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const Card = styled.div`
   width: 250px;
@@ -52,8 +53,29 @@ const MenuItem = styled.div`
   justify-content: center;
   z-index: 200;
 `;
+const addFavorite = async () => {
+  setFavoriteLoading(true);
+  const token = localStorage.getItem("krist-app-token");
+  await addToFavourite(token, { productID: product?._id })
+    .then((res) => {
+      setFavorite(true);
+      setFavoriteLoading(false);
+    })
+    .catch((err) => {
+      setFavoriteLoading(false);
+      dispatch(
+        openSnackbar({
+          message: err.message,
+          severity: "error",
+        })
+      );
+    });
+};
 
-function ProductCard() {
+useEffect(() => {
+  checkFavourite();
+}, []);
+
   return (
     <Card>
       <Top>
