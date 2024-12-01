@@ -49,7 +49,7 @@ function ProductCard() {
       <Top>
       <Image src={product?.img} />
         <Menu>
-          
+
         <MenuItem
             onClick={() => (favorite ? removeFavorite() : addFavorite())}
           >
@@ -65,7 +65,11 @@ function ProductCard() {
               </>
             )}
           </MenuItem>{" "}
-
+          <MenuItem onClick={() => addCart(product?.id)}>
+            <AddShoppingCartOutlined
+              sx={{ color: "inherit", fontSize: "20px" }}
+            />
+          </MenuItem>
           <MenuItem>
              <Rate>
           <Rating value={3.5} sx={{ fontSize: "14px" }} />
