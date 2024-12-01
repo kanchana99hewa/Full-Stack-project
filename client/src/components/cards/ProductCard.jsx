@@ -89,7 +89,21 @@ const removeFavorite = async () => {
       );
     });
 };
-
+const addCart = async () => {
+  const token = localStorage.getItem("krist-app-token");
+  await addToCart(token, { productId: product?._id, quantity: 1 })
+    .then((res) => {
+      navigate("/cart");
+    })
+    .catch((err) => {
+      dispatch(
+        openSnackbar({
+          message: err.message,
+          severity: "error",
+        })
+      );
+    });
+};
 useEffect(() => {
   checkFavourite();
 }, []);
