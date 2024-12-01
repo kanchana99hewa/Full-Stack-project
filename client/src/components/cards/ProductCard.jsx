@@ -71,6 +71,24 @@ const addFavorite = async () => {
       );
     });
 };
+const removeFavorite = async () => {
+  setFavoriteLoading(true);
+  const token = localStorage.getItem("krist-app-token");
+  await deleteFromFavourite(token, { productID: product?._id })
+    .then((res) => {
+      setFavorite(false);
+      setFavoriteLoading(false);
+    })
+    .catch((err) => {
+      setFavoriteLoading(false);
+      dispatch(
+        openSnackbar({
+          message: err.message,
+          severity: "error",
+        })
+      );
+    });
+};
 
 useEffect(() => {
   checkFavourite();
