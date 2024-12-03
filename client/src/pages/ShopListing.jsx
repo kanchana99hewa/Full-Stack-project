@@ -6,7 +6,11 @@ const ShopListing = () => {
        {loading ? (
         <CircularProgress />
       ) : (
-   
+        <>
+        <Filters>
+          <Menu>
+            {filter.map((filters) => (
+              <FilterSection>
       
       <Container/>
   )
