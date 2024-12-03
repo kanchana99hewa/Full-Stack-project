@@ -11,7 +11,9 @@ const ShopListing = () => {
           <Menu>
             {filter.map((filters) => (
               <FilterSection>
-      
+                 <Title>{filters.name}</Title>
+                  {filters.value === "price" ? (
+                    
       <Container/>
   )
 }
