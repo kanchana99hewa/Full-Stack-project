@@ -12,6 +12,16 @@ const Container = styled.div`
     flex-direction: column;
     overflow-y: scroll;
   }
+  const Menu = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+`;
+const Item = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+`;
   background: ${({ theme }) => theme.bg};
 `;
 
