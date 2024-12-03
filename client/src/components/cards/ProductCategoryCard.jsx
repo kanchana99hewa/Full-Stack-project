@@ -13,6 +13,7 @@ const Card = styled.div`
     width: 170px;
   }
 `;
+
 const Image = styled.img`
   width: 100%;
   height: 320px;
@@ -23,6 +24,7 @@ const Image = styled.img`
     height: 240px;
   }
 `;
+
 const Top = styled.div`
   display: flex;
   align-items: center;
@@ -37,17 +39,19 @@ const Top = styled.div`
     opacity: 0.8;
   }
 `;
+
 const Menu = styled.div`
   width: 90%;
   position: absolute;
   z-index: 10;
   color: ${({ theme }) => theme.text_primary};
   bottom: 20px;
-  left: 50;
-  right: 50;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   gap: 12px;
 `;
+
 const Button = styled.div`
   width: 100%;
   color: ${({ theme }) => theme.primary};
@@ -60,6 +64,7 @@ const Button = styled.div`
     padding: 6px 14px;
   }
 `;
+
 const Sale = styled.div`
   position: absolute;
   z-index: 10;
@@ -77,19 +82,25 @@ const Sale = styled.div`
   }
 `;
 
-
-
-
 const ProductCategoryCard = ({ category }) => {
   const navigate = useNavigate();
+
+  if (!category) {
+    console.error("Category data is undefined or null.");
+    return null; // Avoid rendering if category is missing
+  }
+
+  // Destructure category with defaults
+  const { img = "default-image.jpg", name = "Category", off = "" } = category;
+
   return (
-    <Card onClick={() => navigate(`/shop?category=${category.name}`)}>
+    <Card onClick={() => navigate(`/shop?category=${name}`)}>
       <Top>
-        <Image src={category.img} />
+        <Image src={img} alt={`${name}`} />
         <Menu>
-          <Button>{category.name}</Button>
+          <Button>{name}</Button>
         </Menu>
-        <Sale>{category.off}</Sale>
+        {off && <Sale>{off}</Sale>} {/* Render Sale only if `off` exists */}
       </Top>
     </Card>
   );
