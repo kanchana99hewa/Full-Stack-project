@@ -2,7 +2,13 @@ import React from 'react'
 
 const ShopListing = () => {
   return (
-    <div>ShopListing</div>
+    <Container>
+       {loading ? (
+        <CircularProgress />
+      ) : (
+   
+      
+      <Container/>
   )
 }
 
