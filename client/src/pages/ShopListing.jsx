@@ -50,6 +50,51 @@ const Menu = styled.div`
   flex-direction: column;
   gap: 4px;
 `;
+const Products = styled.div`
+  padding: 12px;
+  overflow: hidden;
+  height: fit-content;
+  @media (min-width: 768px) {
+    width: 100%;
+    overflow-y: scroll;
+    height: 100%;
+  }
+`;
+const CardWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+  @media (max-width: 750px) {
+    gap: 14px;
+  }
+`;
+
+const Item = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+`;
+
+const SelectableItem = styled.div`
+  cursor: pointer;
+  display: flex;
+  border: 1px solid ${({ theme }) => theme.text_secondary + 50};
+  color: ${({ theme }) => theme.text_secondary + 90};
+  border-radius: 8px;
+  padding: 2px 8px;
+  font-size: 16px;
+  width: fit-content;
+  ${({ selected, theme }) =>
+    selected &&
+    `
+  border: 1px solid ${theme.text_primary};
+  color: ${theme.text_primary};
+  background: ${theme.text_primary + 30};
+  font-weight: 500;
+  `}
+`;
+
 const ShopListing = () => {
   const [loading, setLoading] = useState(false);
 
