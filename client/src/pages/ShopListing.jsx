@@ -95,8 +95,39 @@ const SelectableItem = styled.div`
   `}
 `;
 
+
 const ShopListing = () => {
   const [loading, setLoading] = useState(false);
+  const [products, setProducts] = useState([]);
+  const [priceRange, setPriceRange] = useState([0, 1000]);
+  const [selectedSizes, setSelectedSizes] = useState(["S", "M", "L", "XL"]); // Default selected sizes
+  const [selectedCategories, setSelectedCategories] = useState([
+    "Men",
+    "Women",
+    "Kids",
+    "Bags",
+  ]); // Default selected categories
+
+  const getFilteredProductsData = async () => {
+    setLoading(true);
+    // Call the API function for filtered products
+    await getAllProducts(
+      `minPrice=${priceRange[0]}&maxPrice=${priceRange[1]}${
+        selectedSizes.length > 0 ? `&sizes=${selectedSizes.join(",")}` : ""
+      }${
+        selectedCategories.length > 0
+          ? `&categories=${selectedCategories.join(",")}`
+          : ""
+      }`
+    ).then((res) => {
+      setProducts(res.data);
+      setLoading(false);
+    });
+  };
+
+  useEffect(() => {
+    getFilteredProductsData();
+  }, [priceRange, selectedSizes, selectedCategories]);
 
 
   return (
