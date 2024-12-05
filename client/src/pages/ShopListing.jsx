@@ -35,6 +35,21 @@ const Filters = styled.div`
     overflow-y: scroll;
   }
 `;
+const FilterSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 12px;
+`;
+const Title = styled.div`
+  font-size: 20px;
+  font-weight: 500;
+`;
+const Menu = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+`;
 const ShopListing = () => {
   const [loading, setLoading] = useState(false);
 
