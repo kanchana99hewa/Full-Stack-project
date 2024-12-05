@@ -74,9 +74,23 @@ const ShopListing = () => {
                         {item}
                       </SelectableItem>
                     ))}
-                  </Item>
-      <Container/>
-  )
-}
+                    </Item>
+                  ) : null}
+                </FilterSection>
+              ))}
+              </Menu>
+          </Filters>
+          <Products>
+            <CardWrapper>
+              {products?.map((product) => (
+                <ProductCard key={product._id} product={product} />
+              ))}
+            </CardWrapper>
+          </Products>
+        </>
+      )}
+    </Container>
+  );
+};
 
-export default ShopListing
+export default ShopListing;
