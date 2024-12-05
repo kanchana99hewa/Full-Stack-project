@@ -24,7 +24,17 @@ const Item = styled.div`
 `;
   background: ${({ theme }) => theme.bg};
 `;
-
+const Filters = styled.div`
+  width: 100%;
+  height: fit-content;
+  overflow-y: hidden;
+  padding: 20px 16px;
+  @media (min-width: 768px) {
+    height: 100%;
+    width: 230px;
+    overflow-y: scroll;
+  }
+`;
 const ShopListing = () => {
   const [loading, setLoading] = useState(false);
 
