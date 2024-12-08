@@ -48,6 +48,16 @@ const Cart = () => {
                         >
                           -
                         </div>
+                        {item?.quantity}
+                        <div
+                          style={{
+                            cursor: "pointer",
+                            flex: 1,
+                          }}
+                          onClick={() => addCart(item?.product?._id)}
+                        >
+                          +
+                        </div>
 
           </Section>
           </Container>
