@@ -19,6 +19,7 @@ const Container = styled.div`
   }
   background: ${({ theme }) => theme.bg};
 `;
+
 const Filters = styled.div`
   width: 100%;
   height: fit-content;
@@ -30,21 +31,25 @@ const Filters = styled.div`
     overflow-y: scroll;
   }
 `;
+
 const FilterSection = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
   padding: 12px;
 `;
+
 const Title = styled.div`
   font-size: 20px;
   font-weight: 500;
 `;
+
 const Menu = styled.div`
   display: flex;
   flex-direction: column;
   gap: 4px;
 `;
+
 const Products = styled.div`
   padding: 12px;
   overflow: hidden;
@@ -55,6 +60,7 @@ const Products = styled.div`
     height: 100%;
   }
 `;
+
 const CardWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -104,24 +110,28 @@ const ShopListing = () => {
 
   const getFilteredProductsData = async () => {
     setLoading(true);
-    // Call the API function for filtered products
-    await getAllProducts(
-      `minPrice=${priceRange[0]}&maxPrice=${priceRange[1]}${
-        selectedSizes.length > 0 ? `&sizes=${selectedSizes.join(",")}` : ""
-      }${
-        selectedCategories.length > 0
-          ? `&categories=${selectedCategories.join(",")}`
-          : ""
-      }`
-    ).then((res) => {
-      setProducts(res.data);
+    try {
+      const response = await getAllProducts(
+        `minPrice=${priceRange[0]}&maxPrice=${priceRange[1]}${
+          selectedSizes.length > 0 ? `&sizes=${selectedSizes.join(",")}` : ""
+        }${
+          selectedCategories.length > 0
+            ? `&categories=${selectedCategories.join(",")}`
+            : ""
+        }`
+      );
+      setProducts(response.data);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    } finally {
       setLoading(false);
-    });
+    }
   };
 
   useEffect(() => {
     getFilteredProductsData();
   }, [priceRange, selectedSizes, selectedCategories]);
+
   return (
     <Container>
       {loading ? (
@@ -130,24 +140,22 @@ const ShopListing = () => {
         <>
           <Filters>
             <Menu>
-              {filter.map((filters) => (
-                <FilterSection>
+              {filter.map((filters, index) => (
+                <FilterSection key={index}>
                   <Title>{filters.name}</Title>
                   {filters.value === "price" ? (
-                    <>
-                      <Slider
-                        aria-label="Price"
-                        defaultValue={priceRange}
-                        min={0}
-                        max={1000}
-                        valueLabelDisplay="auto"
-                        marks={[
-                          { value: 0, label: "$0" },
-                          { value: 1000, label: "$1000" },
-                        ]}
-                        onChange={(e, newValue) => setPriceRange(newValue)}
-                      />
-                    </>
+                    <Slider
+                      aria-label="Price"
+                      value={priceRange}
+                      min={0}
+                      max={1000}
+                      valueLabelDisplay="auto"
+                      marks={[
+                        { value: 0, label: "$0" },
+                        { value: 1000, label: "$1000" },
+                      ]}
+                      onChange={(e, newValue) => setPriceRange(newValue)}
+                    />
                   ) : filters.value === "size" ? (
                     <Item>
                       {filters.items.map((item) => (
@@ -158,7 +166,7 @@ const ShopListing = () => {
                             setSelectedSizes((prevSizes) =>
                               prevSizes.includes(item)
                                 ? prevSizes.filter(
-                                    (category) => category !== item
+                                    (size) => size !== item
                                   )
                                 : [...prevSizes, item]
                             )
