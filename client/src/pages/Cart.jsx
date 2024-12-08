@@ -58,6 +58,19 @@ const Cart = () => {
                         >
                           +
                         </div>
+                        </TableItem>
+                    <TableItem>
+                      <DeleteOutline
+                        sx={{ color: "red" }}
+                        onClick={() =>
+                          removeCart(
+                            item?.product?._id,
+                            item?.quantity - 1,
+                            "full"
+                          )
+                        }
+                      />
+                    </TableItem>
 
           </Section>
           </Container>
