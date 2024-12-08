@@ -22,6 +22,11 @@ const Cart = () => {
                   <TableItem bold>Subtotal</TableItem>
                   <TableItem></TableItem>
                 </Table>
+                {products?.map((item) => (
+                  <Table>
+                    <TableItem flex>
+                      <Product></Product>
+
           </Section>
           </Container>
   )
