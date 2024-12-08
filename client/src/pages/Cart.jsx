@@ -2,7 +2,14 @@ import React from 'react'
 
 const Cart = () => {
   return (
-    <div>Cart</div>
+    <Container>
+      {loading ? (
+        <CircularProgress />
+      ) : (
+        <Section>
+          <Title>Your Shopping Cart</Title>
+          </Section>
+          </Container>
   )
 }
 
