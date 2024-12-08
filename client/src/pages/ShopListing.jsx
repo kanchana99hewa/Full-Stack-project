@@ -1,4 +1,9 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
+import ProductCard from "../components/cards/ProductCard";
+import styled from "styled-components";
+import { category, filter } from "../utils/data";
+import { CircularProgress, Slider } from "@mui/material";
+import { getAllProducts } from "../api";
 
 const Container = styled.div`
   padding: 20px 30px;
@@ -12,16 +17,6 @@ const Container = styled.div`
     flex-direction: column;
     overflow-y: scroll;
   }
-  const Menu = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-`;
-const Item = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-`;
   background: ${({ theme }) => theme.bg};
 `;
 const Filters = styled.div`
@@ -95,7 +90,6 @@ const SelectableItem = styled.div`
   `}
 `;
 
-
 const ShopListing = () => {
   const [loading, setLoading] = useState(false);
   const [products, setProducts] = useState([]);
@@ -128,22 +122,20 @@ const ShopListing = () => {
   useEffect(() => {
     getFilteredProductsData();
   }, [priceRange, selectedSizes, selectedCategories]);
-
-
   return (
     <Container>
-       {loading ? (
+      {loading ? (
         <CircularProgress />
       ) : (
         <>
-        <Filters>
-          <Menu>
-            {filter.map((filters) => (
-              <FilterSection>
-                 <Title>{filters.name}</Title>
+          <Filters>
+            <Menu>
+              {filter.map((filters) => (
+                <FilterSection>
+                  <Title>{filters.name}</Title>
                   {filters.value === "price" ? (
                     <>
-                <Slider
+                      <Slider
                         aria-label="Price"
                         defaultValue={priceRange}
                         min={0}
@@ -158,28 +150,48 @@ const ShopListing = () => {
                     </>
                   ) : filters.value === "size" ? (
                     <Item>
-                    {filters.items.map((item) => (
-                      <SelectableItem
-                        key={item}
-                        selected={selectedSizes.includes(item)}
-                        onClick={() =>
-                          setSelectedSizes((prevSizes) =>
-                            prevSizes.includes(item)
-                              ? prevSizes.filter(
-                                  (category) => category !== item
-                                )
-                              : [...prevSizes, item]
-                          )
-                        }
-                      >
-                        {item}
-                      </SelectableItem>
-                    ))}
+                      {filters.items.map((item) => (
+                        <SelectableItem
+                          key={item}
+                          selected={selectedSizes.includes(item)}
+                          onClick={() =>
+                            setSelectedSizes((prevSizes) =>
+                              prevSizes.includes(item)
+                                ? prevSizes.filter(
+                                    (category) => category !== item
+                                  )
+                                : [...prevSizes, item]
+                            )
+                          }
+                        >
+                          {item}
+                        </SelectableItem>
+                      ))}
+                    </Item>
+                  ) : filters.value === "category" ? (
+                    <Item>
+                      {filters.items.map((item) => (
+                        <SelectableItem
+                          key={item}
+                          selected={selectedCategories.includes(item)}
+                          onClick={() =>
+                            setSelectedCategories((prevCategories) =>
+                              prevCategories.includes(item)
+                                ? prevCategories.filter(
+                                    (category) => category !== item
+                                  )
+                                : [...prevCategories, item]
+                            )
+                          }
+                        >
+                          {item}
+                        </SelectableItem>
+                      ))}
                     </Item>
                   ) : null}
                 </FilterSection>
               ))}
-              </Menu>
+            </Menu>
           </Filters>
           <Products>
             <CardWrapper>
