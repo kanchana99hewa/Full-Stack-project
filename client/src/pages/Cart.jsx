@@ -25,7 +25,14 @@ const Cart = () => {
                 {products?.map((item) => (
                   <Table>
                     <TableItem flex>
-                      <Product></Product>
+                      <Product>
+                      <Img src={item?.product?.img} />
+                        <Details>
+                          <Protitle>{item?.product?.title}</Protitle>
+                          <ProDesc>{item?.product?.name}</ProDesc>
+                          <ProSize>Size: Xl</ProSize>
+                        </Details>
+                      </Product>
 
           </Section>
           </Container>
