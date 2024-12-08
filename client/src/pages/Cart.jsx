@@ -33,6 +33,21 @@ const Cart = () => {
                           <ProSize>Size: Xl</ProSize>
                         </Details>
                       </Product>
+                      </TableItem>
+                    <TableItem>${item?.product?.price?.org}</TableItem>
+                    <TableItem>
+                      <Counter>
+                      <div
+                          style={{
+                            cursor: "pointer",
+                            flex: 1,
+                          }}
+                          onClick={() =>
+                            removeCart(item?.product?._id, item?.quantity - 1)
+                          }
+                        >
+                          -
+                        </div>
 
           </Section>
           </Container>
