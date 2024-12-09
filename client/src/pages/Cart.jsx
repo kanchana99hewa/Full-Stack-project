@@ -14,7 +14,16 @@ const Container = styled.div`
   }
   background: ${({ theme }) => theme.bg};
 `;
-
+const Section = styled.div`
+  width: 100%;
+  max-width: 1400px;
+  padding: 32px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 22px;
+  gap: 28px;
+`;
 const Cart = () => {
   return (
     <Container>
