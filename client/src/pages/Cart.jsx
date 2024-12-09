@@ -57,6 +57,34 @@ const Table = styled.div`
   gap: 30px;
   ${({ head }) => head && `margin-bottom: 22px`}
 `;
+const TableItem = styled.div`
+  ${({ flex }) => flex && `flex: 1; `}
+  ${({ bold }) =>
+    bold &&
+    `font-weight: 600; 
+  font-size: 18px;`}
+`;
+const Counter = styled.div`
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  border: 1px solid ${({ theme }) => theme.text_secondary + 40};
+  border-radius: 8px;
+  padding: 4px 12px;
+`;
+const Product = styled.div`
+  display: flex;
+  gap: 16px;
+`;
+const Img = styled.img`
+  height: 80px;
+`;
+const Details = styled.div``;
+const Protitle = styled.div`
+  color: ${({ theme }) => theme.primary};
+  font-size: 16px;
+  font-weight: 500;
+`;
 
 const Cart = () => {
   return (
