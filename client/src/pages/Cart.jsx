@@ -24,6 +24,23 @@ const Section = styled.div`
   font-size: 22px;
   gap: 28px;
 `;
+const Title = styled.div`
+  font-size: 28px;
+  font-weight: 500;
+  display: flex;
+  justify-content: ${({ center }) => (center ? "center" : "space-between")};
+  align-items: center;
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  gap: 32px;
+  width: 100%;
+  padding: 12px;
+  @media (max-width: 750px) {
+    flex-direction: column;
+  }
+`;
 const Cart = () => {
   return (
     <Container>
