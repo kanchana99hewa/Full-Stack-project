@@ -41,6 +41,23 @@ const Wrapper = styled.div`
     flex-direction: column;
   }
 `;
+const Left = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  @media (max-width: 750px) {
+    flex: 1.2;
+  }
+`;
+const Table = styled.div`
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  ${({ head }) => head && `margin-bottom: 22px`}
+`;
+
 const Cart = () => {
   return (
     <Container>
