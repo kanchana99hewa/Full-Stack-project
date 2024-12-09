@@ -85,6 +85,41 @@ const Protitle = styled.div`
   font-size: 16px;
   font-weight: 500;
 `;
+const ProDesc = styled.div`
+  font-size: 14px;
+  font-weight: 400;
+  color: ${({ theme }) => theme.text_primary};
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
+const ProSize = styled.div`
+  font-size: 14px;
+  font-weight: 500;
+`;
+
+const Right = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  @media (max-width: 750px) {
+    flex: 0.8;
+  }
+`;
+const Subtotal = styled.div`
+  font-size: 22px;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+`;
+const Delivery = styled.div`
+  font-size: 18px;
+  font-weight: 500;
+  display: flex;
+  gap: 6px;
+  flex-direction: column;
+`;
 
 const Cart = () => {
   return (
