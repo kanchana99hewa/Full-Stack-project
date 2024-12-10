@@ -15,6 +15,21 @@ const Container = styled.div`
   }
   background: ${({ theme }) => theme.bg};
 `;
+const Section = styled.div`
+  max-width: 1400px;
+  padding: 32px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+`;
+
+const Title = styled.div`
+  font-size: 28px;
+  font-weight: 500;
+  display: flex;
+  justify-content: ${({ center }) => (center ? "center" : "space-between")};
+  align-items: center;
+`;
 
 const Favourite = () => {
   return (
