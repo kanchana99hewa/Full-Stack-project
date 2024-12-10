@@ -30,8 +30,35 @@ const Title = styled.div`
   justify-content: ${({ center }) => (center ? "center" : "space-between")};
   align-items: center;
 `;
+const CardWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+  @media (max-width: 750px) {
+    gap: 14px;
+  }
+`;
 
 const Favourite = () => {
+  const [loading, setLoading] = useState(false);
+  const [products, setProducts] = useState([]);
+  const [reload, setReload] = useState(false);
+
+  const getProducts = async () => {
+    setLoading(true);
+    const token = localStorage.getItem("krist-app-token");
+    await getFavourite(token).then((res) => {
+      setProducts(res.data);
+      setLoading(false);
+      setReload(!reload);
+    });
+  };
+
+  useEffect(() => {
+    getProducts();
+  }, []);
+  
   return (
     <Container>
     <Section>
