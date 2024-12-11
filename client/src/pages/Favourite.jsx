@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import ProductCard from "../components/cards/ProductCard";
+import { getFavourite } from "../api";
 import { CircularProgress } from "@mui/material";
 
 const Container = styled.div`
@@ -30,6 +33,7 @@ const Title = styled.div`
   justify-content: ${({ center }) => (center ? "center" : "space-between")};
   align-items: center;
 `;
+
 const CardWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -58,31 +62,30 @@ const Favourite = () => {
   useEffect(() => {
     getProducts();
   }, []);
-  
   return (
     <Container>
-    <Section>
-      <Title>Your favourites</Title>
-      <CardWrapper>
-        {loading ? (
-          <CircularProgress />
-        ) : (
-          <>
-            {products.length === 0 ? (
-              <>No Products</>
-            ) : (
-              <CardWrapper>
-                {products.map((product) => (
-                  <ProductCard product={product} />
-                ))}
-              </CardWrapper>
-            )}
-          </>
-        )}
-      </CardWrapper>
-    </Section>
-  </Container>
-  )
-}
+      <Section>
+        <Title>Your favourites</Title>
+        <CardWrapper>
+          {loading ? (
+            <CircularProgress />
+          ) : (
+            <>
+              {products.length === 0 ? (
+                <>No Products</>
+              ) : (
+                <CardWrapper>
+                  {products.map((product) => (
+                    <ProductCard product={product} />
+                  ))}
+                </CardWrapper>
+              )}
+            </>
+          )}
+        </CardWrapper>
+      </Section>
+    </Container>
+  );
+};
 
-export default Favourite
+export default Favourite;
