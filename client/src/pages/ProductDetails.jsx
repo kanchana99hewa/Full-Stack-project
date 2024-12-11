@@ -33,6 +33,15 @@ function ProductDetails() {
                 ))}
               </Items>
             </Sizes>
+            <ButtonWrapper>
+              <Button
+                text="Add to Cart"
+                full
+                outlined
+                isLoading={cartLoading}
+                onClick={() => addCart()}
+              />
+              <Button text="Buy Now" full />
           </Wrapper>
       )}
     </Container>
