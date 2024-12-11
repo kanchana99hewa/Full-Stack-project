@@ -21,6 +21,18 @@ function ProductDetails() {
               <Percent> (${product?.price?.off}% Off) </Percent>
             </Price>
             <Desc>{product?.desc}</Desc>
+            <Sizes>
+              <Items>
+                {product?.sizes.map((size) => (
+                  <Item
+                    selected={selected === size}
+                    onClick={() => setSelected(size)}
+                  >
+                    {size}
+                  </Item>
+                ))}
+              </Items>
+            </Sizes>
           </Wrapper>
       )}
     </Container>
