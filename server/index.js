@@ -29,3 +29,13 @@ app.use((err, req, res, next) => {
       app.use("/api/user/", UserRouter);
       app.use("/api/products/", ProductRoutes);
     
+      const connectDB = () => {
+        mongoose.set("strictQuery", true);
+        mongoose
+          .connect(process.env.MODNO_DB)
+          .then(() => console.log("Connected to MONGO DB"))
+          .catch((err) => {
+            console.error("failed to connect with mongo");
+            console.error(err);
+          });
+      };
