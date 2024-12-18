@@ -12,9 +12,12 @@ app.use((err, req, res, next) => {
       status,
       message,
     });
-    
+
     app.get("/", async (req, res) => {
         res.status(200).json({
           message: "Hello GFG Developers",
         });
       });
+      app.use("/api/user/", UserRouter);
+      app.use("/api/products/", ProductRoutes);
+    
