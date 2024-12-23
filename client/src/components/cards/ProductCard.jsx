@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { CircularProgress, Rating } from "@mui/material";
 import styled from "styled-components";
@@ -184,7 +184,7 @@ const ProductCard = ({ product }) => {
     }
   };
 
-  const checkFavourite = async () => {
+  const checkFavourite = useCallback(async () => {
     setFavoriteLoading(true);
     const token = localStorage.getItem("krist-app-token");
     try {
@@ -203,11 +203,11 @@ const ProductCard = ({ product }) => {
     } finally {
       setFavoriteLoading(false);
     }
-  };
+  }, [product, dispatch]);
 
   useEffect(() => {
     checkFavourite();
-  }, []);
+  }, [checkFavourite]);
 
   return (
     <Card>
