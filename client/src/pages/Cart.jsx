@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import TextInput from "../components/TextInput";
 import Button from "../components/Button";
-import { addToCart, deleteFromCart, getCart, placeOrder } from "../api";
+
 import { useNavigate } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
 import { useDispatch } from "react-redux";
@@ -104,20 +104,7 @@ const Cart = () => {
     completeAddress: "",
   });
 
-  const getProducts = async () => {
-    setLoading(true);
-    const token = localStorage.getItem("krist-app-token");
-    try {
-      const res = await getCart(token);
-      setProducts(res.data);
-    } catch (error) {
-      dispatch(
-        openSnackbar({ message: error.message, severity: "error" })
-      );
-    } finally {
-      setLoading(false);
-    }
-  };
+
 
   useEffect(() => {
     getProducts();
