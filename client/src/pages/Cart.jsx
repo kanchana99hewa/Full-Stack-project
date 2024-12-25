@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import TextInput from "../components/TextInput";
-import Button from "../components/Button";
-
-import { useNavigate } from "react-router-dom";
-import { CircularProgress } from "@mui/material";
-import { useDispatch } from "react-redux";
-import { openSnackbar } from "../redux/reducers/snackbarSlice";
-import { DeleteOutline } from "@mui/icons-material";
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import { CircularProgress } from '@mui/material';
+import { DeleteOutline } from '@mui/icons-material';
+import Button from '../components/Button';
+import { useDispatch } from 'react-redux';
+import { openSnackbar } from '../redux/reducers/snackbarSlice';
+import { getCart, addToCart, deleteFromCart, placeOrder } from '../api';
 
 const Container = styled.div`
   padding: 20px 30px 200px;
@@ -50,37 +48,13 @@ const Table = styled.div`
   display: flex;
   align-items: center;
   gap: 30px;
-  margin-bottom: ${({ head }) => (head ? "22px" : "0")};
+  margin-bottom: ${({ head }) => (head ? '22px' : '0')};
 `;
 
 const TableItem = styled.div`
   flex: 1;
-  font-weight: ${({ bold }) => (bold ? "600" : "400")};
-  font-size: ${({ bold }) => (bold ? "18px" : "16px")};
-`;
-
-const Counter = styled.div`
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  border: 1px solid ${({ theme }) => theme.text_secondary + 40};
-  border-radius: 8px;
-  padding: 4px 12px;
-`;
-
-const Product = styled.div`
-  display: flex;
-  gap: 16px;
-`;
-
-const Img = styled.img`
-  height: 80px;
-`;
-
-const Right = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  font-weight: ${({ bold }) => (bold ? '600' : '400')};
+  font-size: ${({ bold }) => (bold ? '18px' : '16px')};
 `;
 
 const Subtotal = styled.div`
@@ -93,60 +67,59 @@ const Subtotal = styled.div`
 const Cart = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
-  const [reload, setReload] = useState(false);
   const [products, setProducts] = useState([]);
   const [buttonLoad, setButtonLoad] = useState(false);
   const [deliveryDetails, setDeliveryDetails] = useState({
-    firstName: "",
-    lastName: "",
-    emailAddress: "",
-    phoneNumber: "",
-    completeAddress: "",
+    firstName: '',
+    lastName: '',
+    emailAddress: '',
+    phoneNumber: '',
+    completeAddress: '',
   });
 
-
-
   useEffect(() => {
-    getProducts();
-  }, [reload]);
+    fetchCart();
+  }, []);
+
+  const fetchCart = async () => {
+    setLoading(true);
+    try {
+      const token = localStorage.getItem('krist-app-token');
+      const response = await getCart(token);
+      setProducts(response.data);
+    } catch (error) {
+      dispatch(openSnackbar({ message: 'Failed to load cart', severity: 'error' }));
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const calculateSubtotal = () => {
-    return products.reduce(
-      (total, item) => total + item.quantity * item?.product?.price?.org,
-      0
-    ).toFixed(2);
+    return products
+      .reduce((total, item) => total + item.quantity * item.product.price.org, 0)
+      .toFixed(2);
   };
 
   const handleOrder = async () => {
     if (!Object.values(deliveryDetails).every(Boolean)) {
       dispatch(
-        openSnackbar({
-          message: "Please fill in all required delivery details.",
-          severity: "error",
-        })
+        openSnackbar({ message: 'Please fill in all required delivery details.', severity: 'error' })
       );
       return;
     }
     setButtonLoad(true);
     try {
-      const token = localStorage.getItem("krist-app-token");
+      const token = localStorage.getItem('krist-app-token');
       const orderDetails = {
         products,
-        address: Object.values(deliveryDetails).join(", "),
+        address: Object.values(deliveryDetails).join(', '),
         totalAmount: calculateSubtotal(),
       };
       await placeOrder(token, orderDetails);
-      dispatch(
-        openSnackbar({
-          message: "Order placed successfully",
-          severity: "success",
-        })
-      );
-      setReload(!reload);
+      dispatch(openSnackbar({ message: 'Order placed successfully', severity: 'success' }));
+      fetchCart();
     } catch (error) {
-      dispatch(
-        openSnackbar({ message: error.message, severity: "error" })
-      );
+      dispatch(openSnackbar({ message: error.message, severity: 'error' }));
     } finally {
       setButtonLoad(false);
     }
@@ -168,24 +141,14 @@ const Cart = () => {
                   <TableItem>{item.product.title}</TableItem>
                   <TableItem>${item.product.price.org}</TableItem>
                   <TableItem>{item.quantity}</TableItem>
-                  <TableItem>
-                    ${(item.quantity * item.product.price.org).toFixed(2)}
-                  </TableItem>
+                  <TableItem>${(item.quantity * item.product.price.org).toFixed(2)}</TableItem>
                   <DeleteOutline
-                    onClick={() =>
-                      deleteFromCart(item.product._id, item.quantity)
-                    }
+                    onClick={() => deleteFromCart(item.product._id, localStorage.getItem('krist-app-token'))}
                   />
                 </Table>
               ))}
-              <Subtotal>
-                Subtotal: ${calculateSubtotal()}
-              </Subtotal>
-              <Button
-                text="Place Order"
-                isLoading={buttonLoad}
-                onClick={handleOrder}
-              />
+              <Subtotal>Subtotal: ${calculateSubtotal()}</Subtotal>
+              <Button text="Place Order" isLoading={buttonLoad} onClick={handleOrder} />
             </Wrapper>
           )}
         </Section>
