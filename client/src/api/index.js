@@ -46,3 +46,15 @@ export const deleteFromFavourite = async (token, data) =>
   await API.patch(`/user/favorite/`, data, {
     headers: { Authorization: `Bearer ${token}` },
   });
+
+  //Orders
+
+export const placeOrder = async (token, data) =>
+  await API.post(`/user/order/`, data, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+
+export const getOrders = async (token) =>
+  await API.get(`/user/order/`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
