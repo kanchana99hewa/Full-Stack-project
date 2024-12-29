@@ -30,7 +30,7 @@ export const deleteFromCart = async (token, data) =>
     headers: { Authorization: `Bearer ${token}` },
   });
 
-  //Favourites
+//Favourites
 
 export const getFavourite = async (token) =>
   await API.get(`/user/favorite`, {
@@ -47,7 +47,7 @@ export const deleteFromFavourite = async (token, data) =>
     headers: { Authorization: `Bearer ${token}` },
   });
 
-  //Orders
+//Orders
 
 export const placeOrder = async (token, data) =>
   await API.post(`/user/order/`, data, {
