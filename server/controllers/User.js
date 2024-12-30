@@ -31,3 +31,29 @@ export const UserRegister = async (req, res, next) => {
     return next(error);
   }
 };
+
+//user login controller
+export const UserLogin = async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+    console.log(email);
+    const existingUser = await User.findOne({ email });
+    if (!existingUser) {
+      return next(createError(404, "user not found"));
+    }
+
+    const isPasswordCorrect = await bcrypt.compareSync(
+      password,
+      existingUser.password
+    );
+    if (!isPasswordCorrect) {
+      return next(createError(403, "Incorrect password"));
+    }
+    const token = jwt.sign({ id: existingUser._id }, process.env.JWT, {
+      expiresIn: "9999 years",
+    });
+    return res.status(200).json({ token, user: existingUser });
+  } catch (error) {
+    return next(error);
+  }
+};
