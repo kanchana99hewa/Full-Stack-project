@@ -26,3 +26,10 @@ router.patch("/cart", verifyToken, removeFromCart);
 //order
 router.get("/order", verifyToken, getAllOrders);
 router.post("/order", verifyToken, placeOrder);
+
+//favourites
+router.get("/favorite", verifyToken, getUserFavourites);
+router.post("/favorite", verifyToken, addToFavorites);
+router.patch("/favorite", verifyToken, removeFromFavorites);
+
+export default router;
