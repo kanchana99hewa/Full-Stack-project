@@ -80,3 +80,18 @@ export const getproducts = async (req, res, next) => {
     }
   };
   
+  export const getProductById = async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      if (!mongoose.isValidObjectId(id)) {
+        return next(createError(400, "Invalid product ID"));
+      }
+      const product = await Products.findById(id);
+      if (!product) {
+        return next(createError(404, "Product not found"));
+      }
+      return res.status(200).json(product);
+    } catch (err) {
+      return next(error);
+    }
+  };
