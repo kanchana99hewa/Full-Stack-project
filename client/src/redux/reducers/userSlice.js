@@ -1,26 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  currentUser: null,
+  open: false,
+  message: "",
+  severity: "success",
 };
 
-export const userSlice = createSlice({
-  name: "user",
+export const snackbarSlice = createSlice({
+  name: "snackbar",
   initialState,
   reducers: {
-    updateUser: (state, action) => {
-      state.currentUser = action.payload.user;
+    openSnackbar: (state, action) => {
+      state.open = true;
+      state.message = action.payload.message;
+      state.severity = action.payload.severity;
     },
-    loginSuccess: (state, action) => {
-      state.currentUser = action.payload.user;
-      localStorage.setItem("krist-app-token", action.payload.token);
-    },
-    logout: (state) => {
-      state.currentUser = null;
-      localStorage.removeItem("krist-app-token");
+    closeSnackbar: (state) => {
+      state.open = false;
     },
   },
 });
 
-export const { updateUser, loginSuccess, logout } = userSlice.actions;
-export default userSlice.reducer;
+export const { openSnackbar, closeSnackbar } = snackbarSlice.actions;
+export default snackbarSlice.reducer;
