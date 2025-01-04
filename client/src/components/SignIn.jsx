@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import TextInput from "./TextInput";
 import Button from "./Button";
-
+import { UserSignIn } from "../api";
+import { useDispatch } from "react-redux";
+import { loginSuccess } from "../redux/reducers/userSlice";
+import { openSnackbar } from "../redux/reducers/snackbarSlice";
 
 const Container = styled.div`
   width: 100%;
@@ -34,8 +37,8 @@ const TextButton = styled.div`
   }
 `;
 
-function SignIn() {
-
+const SignIn = () => {
+  const dispatch = useDispatch();
   const [buttonLoading, setButtonLoading] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [email, setEmail] = useState("");
@@ -48,48 +51,79 @@ function SignIn() {
     }
     return true;
   };
-  
+
   const handelSignIn = async () => {
     setButtonLoading(true);
     setButtonDisabled(true);
-
-
-    
+    if (validateInputs()) {
+      await UserSignIn({ email, password })
+        .then((res) => {
+          dispatch(loginSuccess(res.data));
+          dispatch(
+            openSnackbar({
+              message: "Login Successful",
+              severity: "success",
+            })
+          );
+        })
+        .catch((err) => {
+          if (err.response) {
+            setButtonLoading(false);
+            setButtonDisabled(false);
+            alert(err.response.data.message);
+            dispatch(
+              openSnackbar({
+                message: err.response.data.message,
+                severity: "error",
+              })
+            );
+          } else {
+            setButtonLoading(false);
+            setButtonDisabled(false);
+            dispatch(
+              openSnackbar({
+                message: err.message,
+                severity: "error",
+              })
+            );
+          }
+        });
+    }
     setButtonDisabled(false);
     setButtonLoading(false);
   };
 
   return (
     <Container>
-    <div>
-      <Title>Welcome to Krist 👋</Title>
-      <Span>Please login with your details here</Span>
-    </div>
-    <div style={{ display: "flex", gap: "20px", flexDirection: "column" }}>
-      <TextInput
-        label="Email Address"
-        placeholder="Enter your email address"
-        value={email}
-        handelChange={(e) => setEmail(e.target.value)}
-      />
-      <TextInput
-        label="Password"
-        placeholder="Enter your password"
-        password
-        value={password}
-        handelChange={(e) => setPassword(e.target.value)}
-      />
+      <div>
+        <Title>Welcome to Krist 👋</Title>
+        <Span>Please login with your details here</Span>
+      </div>
+      <div style={{ display: "flex", gap: "20px", flexDirection: "column" }}>
+        <TextInput
+          label="Email Address"
+          placeholder="Enter your email address"
+          value={email}
+          handelChange={(e) => setEmail(e.target.value)}
+        />
+        <TextInput
+          label="Password"
+          placeholder="Enter your password"
+          password
+          value={password}
+          handelChange={(e) => setPassword(e.target.value)}
+        />
 
-      <TextButton>Forgot Password?</TextButton>
-      <Button
-        text="Sign In"
-        onClick={handelSignIn}
-        isLoading={buttonLoading}
-        isDisabled={buttonDisabled}
-      />
-    </div>
-  </Container>
-  )
-}
+        <TextButton>Forgot Password?</TextButton>
+        <Button
+          text="Sign In"
+          onClick={handelSignIn}
+          isLoading={buttonLoading}
+          isDisabled={buttonDisabled}
+        />
+      </div>
+    </Container>
+  );
+};
 
-export default SignIn
+export default SignIn;
