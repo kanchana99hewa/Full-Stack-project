@@ -30,14 +30,14 @@ border: 1px solid ${({ theme }) => theme.secondary};
   background: ${theme.primary};
 `}
 
-${({ isDisabled }) =>
+  ${({ isDisabled }) =>
     isDisabled &&
     `
   opacity: 0.8;
   cursor: not-allowed;
 
   `}
-    ${({ isLoading }) =>
+  ${({ isLoading }) =>
     isLoading &&
     `
     opacity: 0.8;
@@ -49,11 +49,43 @@ ${({ flex }) =>
     flex: 1;
 `}
 
+${({ small }) =>
+    small &&
+    `
+padding: 10px 28px;
+`}
+  ${({ outlined, theme }) =>
+    outlined &&
+    `
+background: transparent;
+color: ${theme.primary};
+  box-shadow: none;
+`}
+  ${({ full }) =>
+    full &&
+    `
+  width: 100%;`}
+`;
+
+const button = ({
+  text,
+  isLoading,
+  isDisabled,
+  rightIcon,
+  leftIcon,
+  type,
+  onClick,
+  flex,
+  small,
+  outlined,
+  full,
+}) => {
   return (
     <div>
       
     </div>
-  )
+   );
+};
 
 
 export default Button
