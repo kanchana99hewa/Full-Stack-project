@@ -94,3 +94,53 @@ const Input = styled.input`
   color: ${theme.popup_text_secondary};
   `} ${({ theme }) => theme.popup_text_secondary};
 `;
+
+const Error = styled.p`
+  font-size: 12px;
+  margin: 0px 4px;
+  color: ${({ theme }) => theme.red};
+  ${({ small }) =>
+    small &&
+    `
+    font-size: 8px;
+  `}
+`;
+
+const ChipWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+`;
+
+const Chip = styled.div`
+  padding: 5px 10px;
+  border-radius: 8px;
+  background: ${({ theme }) => theme.primary + 10};
+  color: ${({ theme }) => theme.primary};
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+`;
+
+const TextInput = ({
+  label,
+  placeholder,
+  name,
+  value,
+  error,
+  handelChange,
+  textArea,
+  rows,
+  columns,
+  chipableInput,
+  chipableArray,
+  removeChip,
+  height,
+  small,
+  popup,
+  password,
+}) => {
+  const [showPassword, setShowPassword] = useState(false);
