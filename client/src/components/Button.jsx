@@ -81,11 +81,27 @@ const button = ({
   full,
 }) => {
   return (
-    <div>
-      
-    </div>
-   );
+    <Button
+      onClick={() => !isDisabled && !isLoading && onClick()}
+      isDisabled={isDisabled}
+      type={type}
+      isLoading={isLoading}
+      flex={flex}
+      small={small}
+      outlined={outlined}
+      full={full}
+    >
+      {isLoading && (
+        <CircularProgress
+          style={{ width: "18px", height: "18px", color: "inherit" }}
+        />
+      )}
+      {leftIcon}
+      {text}
+      {isLoading && <> . . .</>}
+      {rightIcon}
+    </Button>
+  );
 };
 
-
-export default Button
+export default button;
