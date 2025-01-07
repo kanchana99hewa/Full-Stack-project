@@ -13,7 +13,6 @@ const Card = styled.div`
     width: 170px;
   }
 `;
-
 const Image = styled.img`
   width: 100%;
   height: 320px;
@@ -24,7 +23,6 @@ const Image = styled.img`
     height: 240px;
   }
 `;
-
 const Top = styled.div`
   display: flex;
   align-items: center;
@@ -39,17 +37,17 @@ const Top = styled.div`
     opacity: 0.8;
   }
 `;
-
 const Menu = styled.div`
   width: 90%;
   position: absolute;
   z-index: 10;
   color: ${({ theme }) => theme.text_primary};
   bottom: 20px;
+  left: 50;
+  right: 50;
   display: flex;
   gap: 12px;
 `;
-
 const Button = styled.div`
   width: 100%;
   color: ${({ theme }) => theme.primary};
@@ -62,10 +60,10 @@ const Button = styled.div`
     padding: 6px 14px;
   }
 `;
-
 const Sale = styled.div`
   position: absolute;
   z-index: 10;
+  color: ${({ theme }) => theme.text_primary};
   top: 10px;
   right: 10px;
   font-size: 12px;
@@ -81,20 +79,14 @@ const Sale = styled.div`
 
 const ProductCategoryCard = ({ category }) => {
   const navigate = useNavigate();
-
-  // Fallback values for undefined category or missing properties
-  const imgSrc = category?.img || "/assets/placeholder.jpg";
-  const categoryName = category?.name || "Unknown Category";
-  const discount = category?.off || "No Offer";
-
   return (
-    <Card onClick={() => navigate(`/shop?category=${categoryName}`)}>
+    <Card onClick={() => navigate(`/shop?category=${category.name}`)}>
       <Top>
-        <Image src={imgSrc} alt={categoryName} />
+        <Image src={category.img} />
         <Menu>
-          <Button>{categoryName}</Button>
+          <Button>{category.name}</Button>
         </Menu>
-        <Sale>{discount}</Sale>
+        <Sale>{category.off}</Sale>
       </Top>
     </Card>
   );
