@@ -48,6 +48,7 @@ const OutlinedInput = styled.div`
     `
     border-color: ${theme.red};
   `}
+
   ${({ chipableInput, height, theme }) =>
     chipableInput &&
     `
@@ -72,6 +73,7 @@ const OutlinedInput = styled.div`
   border: 0.5px solid ${theme.popup_text_secondary + 60};
   `}
 `;
+
 const Input = styled.input`
   width: 100%;
   font-size: 14px;
@@ -174,3 +176,43 @@ const TextInput = ({
               onChange={(e) => handelChange(e)}
             />
           </ChipWrapper>
+        ) : (
+          <>
+            <Input
+              popup={popup}
+              small={small}
+              as={textArea ? "textarea" : "input"}
+              name={name}
+              rows={rows}
+              columns={columns}
+              placeholder={placeholder}
+              value={value}
+              onChange={(e) => handelChange(e)}
+              type={password && !showPassword ? "password" : "text"}
+            />
+            {password && (
+              <>
+                {showPassword ? (
+                  <>
+                    <Visibility onClick={() => setShowPassword(false)} />
+                  </>
+                ) : (
+                  <>
+                    <VisibilityOff onClick={() => setShowPassword(true)} />
+                  </>
+                )}
+              </>
+            )}
+          </>
+        )}
+      </OutlinedInput>
+      {error && (
+        <Error small={small} popup={popup}>
+          {error}
+        </Error>
+      )}
+    </Container>
+  );
+};
+
+export default TextInput;
