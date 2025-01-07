@@ -144,3 +144,33 @@ const TextInput = ({
   password,
 }) => {
   const [showPassword, setShowPassword] = useState(false);
+  return (
+    <Container small={small}>
+      <Label small={small} popup={popup} error={error}>
+        {label}
+      </Label>
+      <OutlinedInput
+        small={small}
+        popup={popup}
+        error={error}
+        chipableInput={chipableInput}
+        height={height}
+      >
+        {chipableInput ? (
+          <ChipWrapper>
+            {chipableArray.map((chip, index) => (
+              <Chip key={index}>
+                <span>{chip}</span>
+                <CloseRounded
+                  sx={{ fontSize: "14px" }}
+                  onClick={() => removeChip(name, index)}
+                />
+              </Chip>
+            ))}
+            <Input
+              placeholder={placeholder}
+              name={name}
+              value={value}
+              onChange={(e) => handelChange(e)}
+            />
+          </ChipWrapper>
