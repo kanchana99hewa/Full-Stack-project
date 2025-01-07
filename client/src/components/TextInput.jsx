@@ -72,3 +72,25 @@ const OutlinedInput = styled.div`
   border: 0.5px solid ${theme.popup_text_secondary + 60};
   `}
 `;
+const Input = styled.input`
+  width: 100%;
+  font-size: 14px;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  color: ${({ theme }) => theme.primary};
+  &:focus {
+    outline: none;
+  }
+  ${({ small }) =>
+    small &&
+    `
+    font-size: 12px;
+  `}
+
+  ${({ popup, theme }) =>
+    popup &&
+    `
+  color: ${theme.popup_text_secondary};
+  `} ${({ theme }) => theme.popup_text_secondary};
+`;
