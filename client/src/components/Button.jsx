@@ -20,12 +20,40 @@ const Button = styled.div`
     padding: 8px 12px;
   }
 
-function Button() {
+  ${({ type, theme }) =>
+    type === "secondary"
+      ? `
+  background: ${theme.secondary};
+border: 1px solid ${({ theme }) => theme.secondary};
+  `
+      : `
+  background: ${theme.primary};
+`}
+
+${({ isDisabled }) =>
+    isDisabled &&
+    `
+  opacity: 0.8;
+  cursor: not-allowed;
+
+  `}
+    ${({ isLoading }) =>
+    isLoading &&
+    `
+    opacity: 0.8;
+  cursor: not-allowed;
+`}
+${({ flex }) =>
+    flex &&
+    `
+    flex: 1;
+`}
+
   return (
     <div>
       
     </div>
   )
-}
+
 
 export default Button
