@@ -26,7 +26,7 @@ const Label = styled.label`
   ${({ popup, theme }) =>
     popup &&
     `
-  color: ${theme.popup_text_secondary};
+    color: ${theme.popup_text_secondary};
   `}
 `;
 
@@ -48,7 +48,6 @@ const OutlinedInput = styled.div`
     `
     border-color: ${theme.red};
   `}
-
   ${({ chipableInput, height, theme }) =>
     chipableInput &&
     `
@@ -56,21 +55,19 @@ const OutlinedInput = styled.div`
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
-    min-height: ${height}
+    min-height: ${height};
   `}
-
   ${({ small }) =>
     small &&
     `
     border-radius: 6px;
     padding: 8px 10px;
   `}
-
   ${({ popup, theme }) =>
     popup &&
     `
-  color: ${theme.popup_text_secondary};
-  border: 0.5px solid ${theme.popup_text_secondary + 60};
+    color: ${theme.popup_text_secondary};
+    border: 0.5px solid ${theme.popup_text_secondary + 60};
   `}
 `;
 
@@ -89,12 +86,11 @@ const Input = styled.input`
     `
     font-size: 12px;
   `}
-
   ${({ popup, theme }) =>
     popup &&
     `
-  color: ${theme.popup_text_secondary};
-  `} ${({ theme }) => theme.popup_text_secondary};
+    color: ${theme.popup_text_secondary};
+  `}
 `;
 
 const Error = styled.p`
@@ -133,24 +129,27 @@ const TextInput = ({
   name,
   value,
   error,
-  handelChange,
+  handleChange,
   textArea,
   rows,
-  columns,
+  cols,
   chipableInput,
-  chipableArray,
-  removeChip,
+  chipableArray = [],
+  removeChip = () => {},
   height,
   small,
   popup,
   password,
 }) => {
   const [showPassword, setShowPassword] = useState(false);
+
   return (
     <Container small={small}>
-      <Label small={small} popup={popup} error={error}>
-        {label}
-      </Label>
+      {label && (
+        <Label small={small} popup={popup} error={error}>
+          {label}
+        </Label>
+      )}
       <OutlinedInput
         small={small}
         popup={popup}
@@ -173,7 +172,7 @@ const TextInput = ({
               placeholder={placeholder}
               name={name}
               value={value}
-              onChange={(e) => handelChange(e)}
+              onChange={(e) => handleChange(e)}
             />
           </ChipWrapper>
         ) : (
@@ -184,25 +183,18 @@ const TextInput = ({
               as={textArea ? "textarea" : "input"}
               name={name}
               rows={rows}
-              columns={columns}
+              cols={cols}
               placeholder={placeholder}
               value={value}
-              onChange={(e) => handelChange(e)}
+              onChange={(e) => handleChange(e)}
               type={password && !showPassword ? "password" : "text"}
             />
-            {password && (
-              <>
-                {showPassword ? (
-                  <>
-                    <Visibility onClick={() => setShowPassword(false)} />
-                  </>
-                ) : (
-                  <>
-                    <VisibilityOff onClick={() => setShowPassword(true)} />
-                  </>
-                )}
-              </>
-            )}
+            {password &&
+              (showPassword ? (
+                <Visibility onClick={() => setShowPassword(false)} />
+              ) : (
+                <VisibilityOff onClick={() => setShowPassword(true)} />
+              ))}
           </>
         )}
       </OutlinedInput>
@@ -213,6 +205,19 @@ const TextInput = ({
       )}
     </Container>
   );
+};
+
+// Default Props
+TextInput.defaultProps = {
+  rows: 3,
+  cols: 30,
+  password: false,
+  chipableInput: false,
+  chipableArray: [],
+  removeChip: () => {},
+  small: false,
+  popup: false,
+  error: "",
 };
 
 export default TextInput;

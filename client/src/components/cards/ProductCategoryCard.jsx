@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
+// Styled Components
 const Card = styled.div`
   width: 250px;
   display: flex;
@@ -13,6 +14,7 @@ const Card = styled.div`
     width: 170px;
   }
 `;
+
 const Image = styled.img`
   width: 100%;
   height: 320px;
@@ -23,6 +25,7 @@ const Image = styled.img`
     height: 240px;
   }
 `;
+
 const Top = styled.div`
   display: flex;
   align-items: center;
@@ -37,17 +40,19 @@ const Top = styled.div`
     opacity: 0.8;
   }
 `;
+
 const Menu = styled.div`
   width: 90%;
   position: absolute;
   z-index: 10;
   color: ${({ theme }) => theme.text_primary};
   bottom: 20px;
-  left: 50;
-  right: 50;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   gap: 12px;
 `;
+
 const Button = styled.div`
   width: 100%;
   color: ${({ theme }) => theme.primary};
@@ -60,10 +65,10 @@ const Button = styled.div`
     padding: 6px 14px;
   }
 `;
+
 const Sale = styled.div`
   position: absolute;
   z-index: 10;
-  color: ${({ theme }) => theme.text_primary};
   top: 10px;
   right: 10px;
   font-size: 12px;
@@ -77,16 +82,23 @@ const Sale = styled.div`
   }
 `;
 
+// Main Component
 const ProductCategoryCard = ({ category }) => {
   const navigate = useNavigate();
+
+  // Safeguard undefined values
+  const categoryImg = category?.img || "default-image.jpg"; // Fallback image
+  const categoryName = category?.name || "Unnamed Category";
+  const categoryOff = category?.off || "";
+
   return (
-    <Card onClick={() => navigate(`/shop?category=${category.name}`)}>
+    <Card onClick={() => category && navigate(`/shop?category=${categoryName}`)}>
       <Top>
-        <Image src={category.img} />
+        <Image src={categoryImg} alt={categoryName} />
         <Menu>
-          <Button>{category.name}</Button>
+          <Button>{categoryName}</Button>
         </Menu>
-        <Sale>{category.off}</Sale>
+        {categoryOff && <Sale>{categoryOff}</Sale>}
       </Top>
     </Card>
   );
