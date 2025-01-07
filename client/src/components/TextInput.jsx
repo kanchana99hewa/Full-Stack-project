@@ -48,3 +48,27 @@ const OutlinedInput = styled.div`
     `
     border-color: ${theme.red};
   `}
+  ${({ chipableInput, height, theme }) =>
+    chipableInput &&
+    `
+    background: ${theme.card};
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    min-height: ${height}
+  `}
+
+  ${({ small }) =>
+    small &&
+    `
+    border-radius: 6px;
+    padding: 8px 10px;
+  `}
+
+  ${({ popup, theme }) =>
+    popup &&
+    `
+  color: ${theme.popup_text_secondary};
+  border: 0.5px solid ${theme.popup_text_secondary + 60};
+  `}
+`;
