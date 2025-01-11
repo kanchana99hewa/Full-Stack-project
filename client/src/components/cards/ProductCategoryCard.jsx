@@ -87,7 +87,7 @@ const ProductCategoryCard = ({ category }) => {
   const navigate = useNavigate();
 
   // Safeguard undefined values
-  const categoryImg = category?.img || "default-image.jpg"; // Fallback image
+  const categoryImg = category?.img || "/apple.png";// Fallback image
   const categoryName = category?.name || "Unnamed Category";
   const categoryOff = category?.off || "";
 
