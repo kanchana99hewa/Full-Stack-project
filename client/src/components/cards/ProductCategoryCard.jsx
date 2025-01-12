@@ -2,7 +2,6 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-// Styled Components
 const Card = styled.div`
   width: 250px;
   display: flex;
@@ -14,7 +13,6 @@ const Card = styled.div`
     width: 170px;
   }
 `;
-
 const Image = styled.img`
   width: 100%;
   height: 320px;
@@ -25,7 +23,6 @@ const Image = styled.img`
     height: 240px;
   }
 `;
-
 const Top = styled.div`
   display: flex;
   align-items: center;
@@ -40,19 +37,17 @@ const Top = styled.div`
     opacity: 0.8;
   }
 `;
-
 const Menu = styled.div`
   width: 90%;
   position: absolute;
   z-index: 10;
   color: ${({ theme }) => theme.text_primary};
   bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 50;
+  right: 50;
   display: flex;
   gap: 12px;
 `;
-
 const Button = styled.div`
   width: 100%;
   color: ${({ theme }) => theme.primary};
@@ -65,10 +60,10 @@ const Button = styled.div`
     padding: 6px 14px;
   }
 `;
-
 const Sale = styled.div`
   position: absolute;
   z-index: 10;
+  color: ${({ theme }) => theme.text_primary};
   top: 10px;
   right: 10px;
   font-size: 12px;
@@ -82,23 +77,16 @@ const Sale = styled.div`
   }
 `;
 
-// Main Component
 const ProductCategoryCard = ({ category }) => {
   const navigate = useNavigate();
-
-  // Safeguard undefined values
-  const categoryImg = category?.img || "/apple.png";// Fallback image
-  const categoryName = category?.name || "Unnamed Category";
-  const categoryOff = category?.off || "";
-
   return (
-    <Card onClick={() => category && navigate(`/shop?category=${categoryName}`)}>
+    <Card onClick={() => navigate(`/shop?category=${category.name}`)}>
       <Top>
-        <Image src={categoryImg} alt={categoryName} />
+        <Image src={category.img} />
         <Menu>
-          <Button>{categoryName}</Button>
+          <Button>{category.name}</Button>
         </Menu>
-        {categoryOff && <Sale>{categoryOff}</Sale>}
+        <Sale>{category.off}</Sale>
       </Top>
     </Card>
   );

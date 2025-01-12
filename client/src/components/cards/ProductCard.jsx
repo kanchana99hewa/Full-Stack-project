@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CircularProgress, Rating } from "@mui/material";
 import styled from "styled-components";
@@ -16,6 +16,7 @@ import {
 import { useDispatch } from "react-redux";
 import { openSnackbar } from "../../redux/reducers/snackbarSlice";
 
+// Styled Components
 const Card = styled.div`
   width: 250px;
   display: flex;
@@ -25,6 +26,17 @@ const Card = styled.div`
   cursor: pointer;
   @media (max-width: 600px) {
     width: 170px;
+  }
+`;
+
+const Image = styled.img`
+  width: 100%;
+  height: 320px;
+  border-radius: 6px;
+  object-fit: cover;
+  transition: all 0.3s ease-out;
+  @media (max-width: 600px) {
+    height: 240px;
   }
 `;
 
@@ -46,11 +58,12 @@ const Top = styled.div`
   position: relative;
   border-radius: 6px;
   transition: all 0.3s ease-out;
-
   &:hover {
     background-color: ${({ theme }) => theme.primary};
   }
-
+  &:hover ${Image} {
+    opacity: 0.9;
+  }
   &:hover ${Menu} {
     display: flex;
   }
@@ -65,13 +78,10 @@ const MenuItem = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 200;
 `;
 
 const Rate = styled.div`
   position: absolute;
-  z-index: 10;
-  color: ${({ theme }) => theme.text_primary};
   bottom: 8px;
   left: 8px;
   padding: 4px 8px;
@@ -116,9 +126,8 @@ const Price = styled.div`
 const Span = styled.div`
   font-size: 14px;
   font-weight: 500;
-  color: ${({ theme }) => theme.text_secondary + 60};
+  color: ${({ theme }) => theme.text_secondary};
   text-decoration: line-through;
-  text-decoration-color: ${({ theme }) => theme.text_secondary + 50};
 `;
 
 const Percent = styled.div`
@@ -127,6 +136,7 @@ const Percent = styled.div`
   color: green;
 `;
 
+// Main Component
 const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -134,15 +144,15 @@ const ProductCard = ({ product }) => {
   const [favoriteLoading, setFavoriteLoading] = useState(false);
 
   const addFavorite = async () => {
-    setFavoriteLoading(true);
-    const token = localStorage.getItem("krist-app-token");
     try {
+      setFavoriteLoading(true);
+      const token = localStorage.getItem("krist-app-token");
       await addToFavourite(token, { productID: product?._id });
       setFavorite(true);
     } catch (err) {
       dispatch(
         openSnackbar({
-          message: err.message,
+          message: err.message || "Failed to add favorite.",
           severity: "error",
         })
       );
@@ -152,15 +162,15 @@ const ProductCard = ({ product }) => {
   };
 
   const removeFavorite = async () => {
-    setFavoriteLoading(true);
-    const token = localStorage.getItem("krist-app-token");
     try {
+      setFavoriteLoading(true);
+      const token = localStorage.getItem("krist-app-token");
       await deleteFromFavourite(token, { productID: product?._id });
       setFavorite(false);
     } catch (err) {
       dispatch(
         openSnackbar({
-          message: err.message,
+          message: err.message || "Failed to remove favorite.",
           severity: "error",
         })
       );
@@ -170,52 +180,49 @@ const ProductCard = ({ product }) => {
   };
 
   const addCart = async () => {
-    const token = localStorage.getItem("krist-app-token");
     try {
+      const token = localStorage.getItem("krist-app-token");
       await addToCart(token, { productId: product?._id, quantity: 1 });
       navigate("/cart");
     } catch (err) {
       dispatch(
         openSnackbar({
-          message: err.message,
+          message: err.message || "Failed to add to cart.",
           severity: "error",
         })
       );
     }
   };
 
-  const checkFavourite = useCallback(async () => {
-    setFavoriteLoading(true);
-    const token = localStorage.getItem("krist-app-token");
+  const checkFavourite = async () => {
     try {
+      setFavoriteLoading(true);
+      const token = localStorage.getItem("krist-app-token");
       const res = await getFavourite(token, { productId: product?._id });
-      const isFavorite = res.data?.some(
-        (fav) => fav._id === product?._id
-      );
+      const isFavorite = res.data?.some((fav) => fav._id === product?._id);
       setFavorite(isFavorite);
     } catch (err) {
       dispatch(
         openSnackbar({
-          message: err.message,
+          message: err.message || "Failed to fetch favorites.",
           severity: "error",
         })
       );
     } finally {
       setFavoriteLoading(false);
     }
-  }, [product, dispatch]);
+  };
 
   useEffect(() => {
-    checkFavourite();
-  }, [checkFavourite]);
+    if (product) checkFavourite();
+  }, [product]);
 
   return (
     <Card>
       <Top>
+        <Image src={product?.img || "/default-image.png"} alt={product?.title || "Product"} />
         <Menu>
-          <MenuItem
-            onClick={() => (favorite ? removeFavorite() : addFavorite())}
-          >
+          <MenuItem onClick={() => (favorite ? removeFavorite() : addFavorite())}>
             {favoriteLoading ? (
               <CircularProgress sx={{ fontSize: "20px" }} />
             ) : favorite ? (
@@ -224,19 +231,17 @@ const ProductCard = ({ product }) => {
               <FavoriteBorder sx={{ fontSize: "20px" }} />
             )}
           </MenuItem>
-          <MenuItem onClick={() => addCart()}>
-            <AddShoppingCartOutlined
-              sx={{ color: "inherit", fontSize: "20px" }}
-            />
+          <MenuItem onClick={addCart}>
+            <AddShoppingCartOutlined sx={{ fontSize: "20px" }} />
           </MenuItem>
         </Menu>
         <Rate>
-          <Rating value={3.5} sx={{ fontSize: "14px" }} readOnly />
+          <Rating value={product?.rating || 3.5} readOnly sx={{ fontSize: "14px" }} />
         </Rate>
       </Top>
-      <Details onClick={() => navigate(`/shop/${product._id}`)}>
-        <Title>{product?.title}</Title>
-        <Desc>{product?.name}</Desc>
+      <Details onClick={() => navigate(`/shop/${product?._id}`)}>
+        <Title>{product?.title || "Unknown Product"}</Title>
+        <Desc>{product?.name || "No description available"}</Desc>
         <Price>
           ${product?.price?.org} <Span>${product?.price?.mrp}</Span>
           <Percent>{product?.price?.off}% Off</Percent>
