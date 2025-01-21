@@ -16,7 +16,6 @@ import {
 import { useDispatch } from "react-redux";
 import { openSnackbar } from "../../redux/reducers/snackbarSlice";
 
-// Styled Components
 const Card = styled.div`
   width: 250px;
   display: flex;
@@ -28,7 +27,6 @@ const Card = styled.div`
     width: 170px;
   }
 `;
-
 const Image = styled.img`
   width: 100%;
   height: 320px;
@@ -39,7 +37,6 @@ const Image = styled.img`
     height: 240px;
   }
 `;
-
 const Menu = styled.div`
   position: absolute;
   z-index: 10;
@@ -61,6 +58,7 @@ const Top = styled.div`
   &:hover {
     background-color: ${({ theme }) => theme.primary};
   }
+
   &:hover ${Image} {
     opacity: 0.9;
   }
@@ -68,7 +66,6 @@ const Top = styled.div`
     display: flex;
   }
 `;
-
 const MenuItem = styled.div`
   border-radius: 50%;
   width: 18px;
@@ -78,10 +75,13 @@ const MenuItem = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 200;
 `;
 
 const Rate = styled.div`
   position: absolute;
+  z-index: 10;
+  color: ${({ theme }) => theme.text_primary};
   bottom: 8px;
   left: 8px;
   padding: 4px 8px;
@@ -93,18 +93,18 @@ const Rate = styled.div`
 `;
 
 const Details = styled.div`
+import { useDispatch } from "react-redux";
+import { openSnackbar } from "../../redux/reducers/snackbarSlice";
   display: flex;
   gap: 6px;
   flex-direction: column;
   padding: 4px 10px;
 `;
-
 const Title = styled.div`
   font-size: 16px;
   font-weight: 700;
   color: ${({ theme }) => theme.text_primary};
 `;
-
 const Desc = styled.div`
   font-size: 16px;
   font-weight: 400;
@@ -113,7 +113,6 @@ const Desc = styled.div`
   text-overflow: ellipsis;
   white-space: nowrap;
 `;
-
 const Price = styled.div`
   display: flex;
   align-items: center;
@@ -122,21 +121,19 @@ const Price = styled.div`
   font-weight: 500;
   color: ${({ theme }) => theme.text_primary};
 `;
-
 const Span = styled.div`
   font-size: 14px;
   font-weight: 500;
-  color: ${({ theme }) => theme.text_secondary};
+  color: ${({ theme }) => theme.text_secondary + 60};
   text-decoration: line-through;
+  text-decoration-color: ${({ theme }) => theme.text_secondary + 50};
 `;
-
 const Percent = styled.div`
   font-size: 12px;
   font-weight: 500;
   color: green;
 `;
 
-// Main Component
 const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -144,107 +141,117 @@ const ProductCard = ({ product }) => {
   const [favoriteLoading, setFavoriteLoading] = useState(false);
 
   const addFavorite = async () => {
-    try {
-      setFavoriteLoading(true);
-      const token = localStorage.getItem("krist-app-token");
-      await addToFavourite(token, { productID: product?._id });
-      setFavorite(true);
-    } catch (err) {
-      dispatch(
-        openSnackbar({
-          message: err.message || "Failed to add favorite.",
-          severity: "error",
-        })
-      );
-    } finally {
-      setFavoriteLoading(false);
-    }
+    setFavoriteLoading(true);
+    const token = localStorage.getItem("krist-app-token");
+    await addToFavourite(token, { productID: product?._id })
+      .then((res) => {
+        setFavorite(true);
+        setFavoriteLoading(false);
+      })
+      .catch((err) => {
+        setFavoriteLoading(false);
+        dispatch(
+          openSnackbar({
+            message: err.message,
+            severity: "error",
+          })
+        );
+      });
   };
-
   const removeFavorite = async () => {
-    try {
-      setFavoriteLoading(true);
-      const token = localStorage.getItem("krist-app-token");
-      await deleteFromFavourite(token, { productID: product?._id });
-      setFavorite(false);
-    } catch (err) {
-      dispatch(
-        openSnackbar({
-          message: err.message || "Failed to remove favorite.",
-          severity: "error",
-        })
-      );
-    } finally {
-      setFavoriteLoading(false);
-    }
+    setFavoriteLoading(true);
+    const token = localStorage.getItem("krist-app-token");
+    await deleteFromFavourite(token, { productID: product?._id })
+      .then((res) => {
+        setFavorite(false);
+        setFavoriteLoading(false);
+      })
+      .catch((err) => {
+        setFavoriteLoading(false);
+        dispatch(
+          openSnackbar({
+            message: err.message,
+            severity: "error",
+          })
+        );
+      });
   };
-
   const addCart = async () => {
-    try {
-      const token = localStorage.getItem("krist-app-token");
-      await addToCart(token, { productId: product?._id, quantity: 1 });
-      navigate("/cart");
-    } catch (err) {
-      dispatch(
-        openSnackbar({
-          message: err.message || "Failed to add to cart.",
-          severity: "error",
-        })
-      );
-    }
+    const token = localStorage.getItem("krist-app-token");
+    await addToCart(token, { productId: product?._id, quantity: 1 })
+      .then((res) => {
+        navigate("/cart");
+      })
+      .catch((err) => {
+        dispatch(
+          openSnackbar({
+            message: err.message,
+            severity: "error",
+          })
+        );
+      });
   };
-
   const checkFavourite = async () => {
-    try {
-      setFavoriteLoading(true);
-      const token = localStorage.getItem("krist-app-token");
-      const res = await getFavourite(token, { productId: product?._id });
-      const isFavorite = res.data?.some((fav) => fav._id === product?._id);
-      setFavorite(isFavorite);
-    } catch (err) {
-      dispatch(
-        openSnackbar({
-          message: err.message || "Failed to fetch favorites.",
-          severity: "error",
-        })
-      );
-    } finally {
-      setFavoriteLoading(false);
-    }
+    setFavoriteLoading(true);
+    const token = localStorage.getItem("krist-app-token");
+    await getFavourite(token, { productId: product?._id })
+      .then((res) => {
+        const isFavorite = res.data?.some(
+          (favorite) => favorite._id === product?._id
+        );
+        setFavorite(isFavorite);
+        setFavoriteLoading(false);
+      })
+      .catch((err) => {
+        setFavoriteLoading(false);
+        dispatch(
+          openSnackbar({
+            message: err.message,
+            severity: "error",
+          })
+        );
+      });
   };
 
   useEffect(() => {
-    if (product) checkFavourite();
-  }, [product]);
-
+    checkFavourite();
+  }, []);
   return (
     <Card>
       <Top>
-        <Image src={product?.img || "/default-image.png"} alt={product?.title || "Product"} />
+        <Image src={product?.img} />
         <Menu>
-          <MenuItem onClick={() => (favorite ? removeFavorite() : addFavorite())}>
+          <MenuItem
+            onClick={() => (favorite ? removeFavorite() : addFavorite())}
+          >
             {favoriteLoading ? (
               <CircularProgress sx={{ fontSize: "20px" }} />
-            ) : favorite ? (
-              <FavoriteRounded sx={{ fontSize: "20px", color: "red" }} />
             ) : (
-              <FavoriteBorder sx={{ fontSize: "20px" }} />
+              <>
+                {favorite ? (
+                  <FavoriteRounded sx={{ fontSize: "20px", color: "red" }} />
+                ) : (
+                  <FavoriteBorder sx={{ fontSize: "20px" }} />
+                )}
+              </>
             )}
-          </MenuItem>
-          <MenuItem onClick={addCart}>
-            <AddShoppingCartOutlined sx={{ fontSize: "20px" }} />
+          </MenuItem>{" "}
+          <MenuItem onClick={() => addCart(product?.id)}>
+            <AddShoppingCartOutlined
+              sx={{ color: "inherit", fontSize: "20px" }}
+            />
           </MenuItem>
         </Menu>
         <Rate>
-          <Rating value={product?.rating || 3.5} readOnly sx={{ fontSize: "14px" }} />
+          <Rating value={3.5} sx={{ fontSize: "14px" }} />
         </Rate>
       </Top>
-      <Details onClick={() => navigate(`/shop/${product?._id}`)}>
-        <Title>{product?.title || "Unknown Product"}</Title>
-        <Desc>{product?.name || "No description available"}</Desc>
+      <Details onClick={() => navigate(`/shop/${product._id}`)}>
+        <Title>{product?.title}</Title>
+        <Desc>{product?.name}</Desc>
         <Price>
           ${product?.price?.org} <Span>${product?.price?.mrp}</Span>
-          <Percent>{product?.price?.off}% Off</Percent>
+          <Percent>${product?.price?.off}% Off</Percent>
         </Price>
       </Details>
     </Card>
